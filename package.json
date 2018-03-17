@@ -8,5 +8,9 @@
     "start": "echo --- start --- && cd server && npm start",
     "dev:server": "cd server && npm run dev",
     "dev:client": "cd client && npm run start"
+  },
+  "dependencies": {
+    "express-validator": "^5.0.3",
+    "randomstring": "^1.1.5"
   }
 }

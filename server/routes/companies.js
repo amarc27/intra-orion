@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const Company = require('../models/company');
 const User = require('../models/user');
 const passport = require('passport');
 const config = require('../config');
@@ -20,30 +21,30 @@ const storage = cloudinaryStorage({
 const parser = multer({ storage });
 
 
-// Route to get all users
+// Route to get all companies
 router.get('/', (req, res, next) => {
-  User.find()
-    .then(users => {
-      res.json(users)
+  Company.find()
+    .then(companies => {
+      res.json(companies)
     })
 });
 
 
 
-//GET a single user
+//GET a single company
 router.get('/:id', (req, res) => {
   if(!mongoose.Types.ObjectId.isValid(req.params.id)) {
     res.status(400).json({ message: 'Specified id is not valid' });
     return;
   }
   
-  User.findById(req.params.id, (err, user) => {
+  Company.findById(req.params.id, (err, company) => {
       if (err) {
         res.json(err);
         return;
       }
 
-      res.json(user);
+      res.json(company);
     });
 });
 
@@ -51,36 +52,34 @@ router.get('/:id', (req, res) => {
 
 
 
-// Route to add a user
+// Route to add a company
 router.post('/', (req, res, next) => {
-  const user = new User({
-    firstname: req.body.firstname,
-    lastname: req.body.lastname,
-    mobilePhone: req.body.mobilePhone,
-    role: req.body.role,
+  const company = new Company({
+    name: req.body.name,
     pictureUrl: req.body.pictureUrl,
-    position: req.body.position,
-    _company: req.body._company,
-    email: req.body.email,
-    signupSecret: randomstring.generate()
+    description: req.body.description,
+    _employees: req.body._employees,
+    website: req.body.website,
+    role: req.body.role,
+    sector: req.body.sector
   });
 
-  user.save((err) => {
+  company.save((err) => {
     if (err) {
       res.json(err);
       return;
     }
 
     res.json({
-      message: 'New user created!',
-      id: user._id
+      message: 'New company created!',
+      id: company._id
     });
   });
 });
 
 
 
-/* EDIT a user. */
+/* EDIT a company. */
 router.put('/:id', (req, res) => {
   if(!mongoose.Types.ObjectId.isValid(req.params.id)) {
     res.status(400).json({ message: 'Specified id is not valid' });
@@ -88,24 +87,23 @@ router.put('/:id', (req, res) => {
   }
 
   const updates = {
-    firstname: req.body.firstname,
-    lastname: req.body.lastname,
-    mobilePhone: req.body.mobilePhone,
-    role: req.body.role,
+    name: req.body.name,
     pictureUrl: req.body.pictureUrl,
-    position: req.body.position,
-    _company: req.body._company,
-    email: req.body.email
+    description: req.body.description,
+    _employees: req.body._employees,
+    website: req.body.website,
+    role: req.body.role,
+    sector: req.body.sector
   };
   
-  User.findByIdAndUpdate(req.params.id, updates, (err) => {
+  Company.findByIdAndUpdate(req.params.id, updates, (err) => {
     if (err) {
       res.json(err);
       return;
     }
 
     res.json({
-      message: 'User updated successfully'
+      message: 'Company updated successfully'
     });
   });
 })
@@ -113,21 +111,21 @@ router.put('/:id', (req, res) => {
 
 
 
-/* DELETE a user. */
+/* DELETE a company. */
 router.delete('/:id', (req, res) => {
   if(!mongoose.Types.ObjectId.isValid(req.params.id)) {
     res.status(400).json({ message: 'Specified id is not valid' });
     return;
   }
   
-  User.remove({ _id: req.params.id }, (err) => {
+  Company.remove({ _id: req.params.id }, (err) => {
     if (err) {
       res.json(err);
       return;
     }
 
     return res.json({
-      message: 'User has been removed!'
+      message: 'Company has been removed!'
     });
   })
 });
@@ -156,7 +154,7 @@ router.delete('/:id', (req, res) => {
 //     <input type="submit" value="Upload" />
 //   </form>
 router.post('/picture-one-user', parser.single('picture'), (req, res, next) => {
-  User.findOneAndUpdate({}, {pictureUrl: req.file.url })
+  Company.findOneAndUpdate({}, {pictureUrl: req.file.url })
     .then(() => {
       res.json({
         success: true,

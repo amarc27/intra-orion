@@ -4,21 +4,55 @@ const User = require('../models/user');
 const jwt = require('jwt-simple');
 const passport = require('passport');
 const config = require('../config');
+const { body,validationResult } = require('express-validator/check');
+const { sanitizeBody } = require('express-validator/filter');
 
 
 router.post('/signup', (req, res, next) => {
   // extract the info we need from the body of the request
-  const { email, name, password } = req.body;
-  const user = new User({
-    email,
-    name
-  });
+  const { email, firstname, mobilePhone, lastname, password, signupSecret } = req.body;
 
-  User.register(user, password, err => {
-    if (err) return next(err);
-    res.json({ success: true });
-  });
+  //Chercher utilisateur via son email et son signupSecret
+  User.findOne( {email: email, signupSecret})
+    .then(user => {
+      if (!user)
+        return next(new Error("No user found"))
+      console.log("Success", user);
+
+      //Permettre au user de changer son password
+      user.setPassword(password, (err, doc) => {
+        if (err)
+          return next(err)
+        doc.save(err => {
+          if (err)
+            return next(err)
+          res.json({ success: true })
+        });
+      })
+    })
+    .catch( (err) => {
+      next(err)
+    });
+
+    // [
+    //   check('email')
+    //     .isEmail() .withMessage('Email is required') .trim(),
+    
+    //   check('password')
+    //     .withMessage('Password is required') .trim(),
+
+    //   check('firstname')
+    //     .withMessage('Firstname is required') .trim(),
+      
+    //   check('lastname')
+    //     .withMessage('Lastname is required') .trim(),
+
+    //   check('mobilePhone')
+    //     .withMessage('Mobile phone is required') .trim()
+    // ]
 });
+
+
 
 router.post('/login', (req, res, next) => {
   const authenticate = User.authenticate();

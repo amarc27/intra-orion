@@ -1,10 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const User = require('../models/user');
-const passport = require('passport');
+const Perk = require('../models/perk');
 const config = require('../config');
 const mongoose = require("mongoose");
-const randomstring = require("randomstring");
 
 
 const cloudinary = require('cloudinary');
@@ -20,30 +18,30 @@ const storage = cloudinaryStorage({
 const parser = multer({ storage });
 
 
-// Route to get all users
+// Route to get all perks
 router.get('/', (req, res, next) => {
-  User.find()
-    .then(users => {
-      res.json(users)
+  Perk.find()
+    .then(perk => {
+      res.json(perk)
     })
 });
 
 
 
-//GET a single user
+//GET a single perk
 router.get('/:id', (req, res) => {
   if(!mongoose.Types.ObjectId.isValid(req.params.id)) {
     res.status(400).json({ message: 'Specified id is not valid' });
     return;
   }
   
-  User.findById(req.params.id, (err, user) => {
+  Perk.findById(req.params.id, (err, perk) => {
       if (err) {
         res.json(err);
         return;
       }
 
-      res.json(user);
+      res.json(perk);
     });
 });
 
@@ -51,36 +49,31 @@ router.get('/:id', (req, res) => {
 
 
 
-// Route to add a user
+// Route to add a perk
 router.post('/', (req, res, next) => {
-  const user = new User({
-    firstname: req.body.firstname,
-    lastname: req.body.lastname,
-    mobilePhone: req.body.mobilePhone,
-    role: req.body.role,
+  const perk = new Perk({
+    name: req.body.name,
     pictureUrl: req.body.pictureUrl,
-    position: req.body.position,
-    _company: req.body._company,
-    email: req.body.email,
-    signupSecret: randomstring.generate()
+    description: req.body.description,
+    category: req.body.category
   });
 
-  user.save((err) => {
+  perk.save((err) => {
     if (err) {
       res.json(err);
       return;
     }
 
     res.json({
-      message: 'New user created!',
-      id: user._id
+      message: 'New perk created!',
+      id: perk._id
     });
   });
 });
 
 
 
-/* EDIT a user. */
+/* EDIT a perk. */
 router.put('/:id', (req, res) => {
   if(!mongoose.Types.ObjectId.isValid(req.params.id)) {
     res.status(400).json({ message: 'Specified id is not valid' });
@@ -88,24 +81,20 @@ router.put('/:id', (req, res) => {
   }
 
   const updates = {
-    firstname: req.body.firstname,
-    lastname: req.body.lastname,
-    mobilePhone: req.body.mobilePhone,
-    role: req.body.role,
+    name: req.body.name,
     pictureUrl: req.body.pictureUrl,
-    position: req.body.position,
-    _company: req.body._company,
-    email: req.body.email
+    description: req.body.description,
+    category: req.body.category
   };
   
-  User.findByIdAndUpdate(req.params.id, updates, (err) => {
+  Perk.findByIdAndUpdate(req.params.id, updates, (err) => {
     if (err) {
       res.json(err);
       return;
     }
 
     res.json({
-      message: 'User updated successfully'
+      message: 'Perk updated successfully'
     });
   });
 })
@@ -113,21 +102,21 @@ router.put('/:id', (req, res) => {
 
 
 
-/* DELETE a user. */
+/* DELETE a perk. */
 router.delete('/:id', (req, res) => {
   if(!mongoose.Types.ObjectId.isValid(req.params.id)) {
     res.status(400).json({ message: 'Specified id is not valid' });
     return;
   }
   
-  User.remove({ _id: req.params.id }, (err) => {
+  Perk.remove({ _id: req.params.id }, (err) => {
     if (err) {
       res.json(err);
       return;
     }
 
     return res.json({
-      message: 'User has been removed!'
+      message: 'Perk has been removed!'
     });
   })
 });
@@ -156,7 +145,7 @@ router.delete('/:id', (req, res) => {
 //     <input type="submit" value="Upload" />
 //   </form>
 router.post('/picture-one-user', parser.single('picture'), (req, res, next) => {
-  User.findOneAndUpdate({}, {pictureUrl: req.file.url })
+  Perk.findOneAndUpdate({}, {pictureUrl: req.file.url })
     .then(() => {
       res.json({
         success: true,
