@@ -9,7 +9,7 @@ const { Strategy, ExtractJwt } = require("passport-jwt");
 
 const config = require("./config");
 var authRoutes = require('./routes/auth');
-var usersRoutes = require('./routes/users');
+var peoplesRoutes = require('./routes/peoples');
 var companiesRoutes = require('./routes/companies');
 var perkRoutes = require('./routes/perks');
 var candidateSchema = require('./routes/candidates');
@@ -46,12 +46,12 @@ const strategy = new Strategy(
   (payload, done) => {
     // payload is the object we encrypted at the route /api/token
     // We get the user id, make sure the user exist by looking it up
-    User.findById(payload.id).then(user => {
-      if (user) {
-        // make the user accessible in req.user
-        done(null, user);
+    People.findById(payload.id).then(people => {
+      if (people) {
+        // make the people accessible in req.people
+        done(null, people);
       } else {
-        done(new Error("User not found"));
+        done(new Error("People not found"));
       }
     });
   }
@@ -61,7 +61,7 @@ passport.use(strategy);
 
 // List all your API routes
 app.use('/api', authRoutes);
-app.use('/api/users', usersRoutes);
+app.use('/api/peoples', peoplesRoutes);
 app.use('/api/companies', companiesRoutes);
 app.use('/api/perks', perkRoutes);
 app.use('/api/candidates', candidateSchema);

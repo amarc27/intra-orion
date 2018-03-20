@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Company = require('../models/company');
-const User = require('../models/user');
+const People = require('../models/people');
 const passport = require('passport');
 const config = require('../config');
 const mongoose = require("mongoose");
@@ -142,18 +142,18 @@ router.delete('/:id', (req, res) => {
 
 
 
-// Route to add a picture on one user with Cloudinary
+// Route to add a picture on one people with Cloudinary
 // To perform the request throw Postman, you need
-// - Endpoint: POST http://localhost:3030/api/users/picture
+// - Endpoint: POST http://localhost:3030/api/peoples/picture
 // - Select: Body > form-data
 // - Put as key: picture (and select "File")
 // - Upload your file
 // To perform the request in HTML:
-//   <form method="post" enctype="multipart/form-data" action="http://localhost:3030/api/users/picture">
+//   <form method="post" enctype="multipart/form-data" action="http://localhost:3030/api/peoples/picture">
 //     <input type="file" name="picture" />
 //     <input type="submit" value="Upload" />
 //   </form>
-router.post('/picture-one-user', parser.single('picture'), (req, res, next) => {
+router.post('/picture-one-people', parser.single('picture'), (req, res, next) => {
   Company.findOneAndUpdate({}, {pictureUrl: req.file.url })
     .then(() => {
       res.json({

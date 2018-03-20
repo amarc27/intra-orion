@@ -1,11 +1,11 @@
 const mongoose = require("mongoose");
-const User = require('../models/user');
+const People = require('../models/people');
 const Company = require('../models/company');
 require('../configs/database');
 
 
 
-const myUsers = [
+const myPeoples = [
     {
         firstname: 'John',
         lastname: 'Doe',
@@ -64,9 +64,9 @@ const myCompanies = [
 ];
 
 
-let myUserDocs = []
-for (let i = 0; i < myUsers.length; i++) {
-    myUserDocs.push(new User(myUsers[i]))
+let myPeopleDocs = []
+for (let i = 0; i < myPeoples.length; i++) {
+    myPeopleDocs.push(new People(myPeoples[i]))
 }
 
 let myCompanyDocs = []
@@ -76,14 +76,14 @@ for (let i = 0; i < myCompanies.length; i++) {
 
 // Link between models (everyone is in the first company)
 myCompanyDocs[0]._employees = []
-for (let i = 0; i < myUserDocs.length; i++) {
-    myUserDocs[i]._company = myCompanyDocs[0]._id
-    myCompanyDocs[0]._employees.push(myUserDocs[i]._id)
+for (let i = 0; i < myPeopleDocs.length; i++) {
+    myPeopleDocs[i]._company = myCompanyDocs[0]._id
+    myCompanyDocs[0]._employees.push(myPeopleDocs[i]._id)
 }
 
-// myUserDocs[0]._company = myCompanyDocs[1]._id
+// myPeopleDocs[0]._company = myCompanyDocs[1]._id
 
-console.log(myUserDocs);
+console.log(myPeopleDocs);
 console.log(myCompanyDocs);
 
 
@@ -92,17 +92,17 @@ console.log(myCompanyDocs);
 
 
 
-User.remove()
+People.remove()
     .then(() => {
-        // User.create(myUsers)
+        // People.create(myPeoples)
         // .catch(err => { console.log(err) })   
 
         Company.remove()
             .then(() => {
                 // Company.create(myCompanies)
                 // .catch(err => { console.log(err) })   
-                for (let i = 0; i < myUserDocs.length; i++) {
-                    myUserDocs[i].save()
+                for (let i = 0; i < myPeopleDocs.length; i++) {
+                    myPeopleDocs[i].save()
                 }
                 for (let i = 0; i < myCompanyDocs.length; i++) {
                     myCompanyDocs[i].save()
