@@ -53,6 +53,7 @@ router.get('/:id', (req, res) => {
 
 // Route to add a people
 router.post('/', (req, res, next) => {
+  console.log(req.body);
   const people = new People({
     firstname: req.body.firstname,
     lastname: req.body.lastname,
@@ -67,6 +68,8 @@ router.post('/', (req, res, next) => {
 
   people.save((err) => {
     if (err) {
+      console.log(err);
+      
       res.json(err);
       return;
     }

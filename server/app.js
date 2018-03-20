@@ -61,7 +61,7 @@ passport.use(strategy);
 
 // List all your API routes
 app.use('/api', authRoutes);
-app.use('/api/peoples', peoplesRoutes);
+app.use('/api/people', peoplesRoutes);
 app.use('/api/companies', companiesRoutes);
 app.use('/api/perks', perkRoutes);
 app.use('/api/candidates', candidateSchema);
