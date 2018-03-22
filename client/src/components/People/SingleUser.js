@@ -10,32 +10,32 @@ class SingleUser extends Component {
     super(props)
     this.state = {
       people: [],
-      // message: null,
-      // f: "",
-      // l: ""
+      message: null,
+      f: "",
+      l: ""
     }
   }
 
 
-  // handleClick(e) {
-  //   e.preventDefault()
-  //   let id = this.props.match.params.id
+  handleClick(e) {
+    e.preventDefault()
+    let id = this.props.match.params.id
 
-  //   api.deletePeople(id)
-  //     .then(people => {
-  //       this.setState({
-  //         f: people.firstname,
-  //         l: people.lastname,
-  //         message: `Your people '${this.state.f} ${this.state.l}' has been deleted`
-  //       })
+    api.deletePeople(id)
+      .then(people => {
+        this.setState({
+          f: people.firstname,
+          l: people.lastname,
+          message: `Your people '${this.state.f} ${this.state.l}' has been deleted`
+        })
 
-  //       setTimeout(() => {
-  //         this.setState({
-  //           message: null
-  //         })
-  //       }, 2000)
-  //     })
-  //   }
+        setTimeout(() => {
+          this.setState({
+            message: null
+          })
+        }, 2000)
+      })
+    }
 
 
   componentDidMount(props) {
@@ -59,7 +59,14 @@ class SingleUser extends Component {
         <p> {this.state.people.mobilePhone} </p>
         {/* <p> {this.state.people.role.enum} </p> */}
 
-        {/* <button type="submit" onClick={(e) => this.handleClick(e)}>Delete</button> */}
+        <button type="submit" onClick={(e) => this.handleClick(e)}>Delete</button>
+        <div style={{
+          margin: 10,
+          backgroundColor: "green",
+          display: this.state.message ? "block" : "none"
+        }}>
+          {this.state.message}
+        </div>
       </div>
     );
   }

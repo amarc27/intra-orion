@@ -44,7 +44,7 @@ export default {
     return service
       .delete('/people/' + id)
       .then(res => res.data)
-      .catch(errHandler);            
+      .catch(errHandler);      
   }
 
 };
