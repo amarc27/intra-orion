@@ -2,11 +2,13 @@ import React, { Component } from 'react';
 import { Route, Link, Switch, NavLink } from 'react-router-dom';
 
 import Home from './Home';
-import People from './People';
-import AddPeople from './AddPeople';
+import People from './People/People';
+import AddPeople from './People/AddPeople';
+import EditPeople from './People/EditPeople';
+import SingleUser from './People/SingleUser';
 
 import api from '../api';
-import logo from '../logo.svg';
+import logo from '../orion-bleu.png';
 import './App.css';
 
 
@@ -30,7 +32,9 @@ class App extends Component {
         <Switch>
           <Route path="/" exact component={Home} />
           <Route path="/people" exact component={People} />
-          <Route path="/people/add" component={AddPeople}/>
+          <Route path="/people/add" exact component={AddPeople}/>
+          <Route path="/people/:id/edit" exact component={EditPeople}/>
+          <Route path="/people/:id" exact component={SingleUser}/>
           <Route render={() => <h2>404</h2>} />
         </Switch>        
       </div>

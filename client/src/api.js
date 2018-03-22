@@ -24,6 +24,27 @@ export default {
       .post('/people', data)
       .then(res => res.data)
       .catch(errHandler);
+  },
+
+  editPeople(id, data) {
+    return service
+      .put('/people/' + id, data)
+      .then(res => res.data)
+      .catch(errHandler);
+  },
+
+  getSingleUser(id) {
+    return service
+      .get('/people/' + id)
+      .then(res => res.data)
+      .catch(errHandler);      
+  },
+
+  deletePeople(id) {
+    return service
+      .delete('/people/' + id)
+      .then(res => res.data)
+      .catch(errHandler);            
   }
 
 };

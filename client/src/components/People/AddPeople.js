@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 // import { Route, Switch, NavLink, Link } from 'react-router-dom';
-import api from '../api';
-// import './AddPeople.css';
+import api from '../../api';
+// import './People/AddPeople.css';
 
 
 class AddPeople extends Component {
@@ -41,7 +41,6 @@ class AddPeople extends Component {
 
     api.postPeople(data)
       .then(result => {
-        console.log('SUCCESS!')
         this.setState({
           firstname: "",
           lastname: "",
@@ -75,7 +74,7 @@ class AddPeople extends Component {
           pictureUrl: <input type="text" value={this.state.pictureUrl} onChange={(e) => {this.handleInputChange("pictureUrl", e)}} /> <br/>
           position: <input type="text" value={this.state.position} onChange={(e) => {this.handleInputChange("position", e)}} /> <br/>
           email: <input type="text" value={this.state.email} onChange={(e) => {this.handleInputChange("email", e)}} /> <br/>
-          <button onClick={(e) => this.handleClick(e)}>Create country</button>
+          <button onClick={(e) => this.handleClick(e)}>Create people</button>
         </form>
         <div style={{
           margin: 10,
