@@ -22,7 +22,10 @@ const parser = multer({ storage });
 
 // Route to get all people
 router.get('/', (req, res, next) => {
-  People.find()
+  let filter = {}
+  if (req.query.role)
+    filter.role = req.query.role
+  People.find(filter)
     .then(peoples => {
       res.json(peoples)
     })

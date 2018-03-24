@@ -168,4 +168,14 @@ deleteKnowledge(id) {
 },
 
 
+
+
+// Office hours
+getSpecificPeople() {
+  return service
+  .get('/people?role=EIR')
+  .then(res => res.data)
+  .catch(errHandler);
+},
+
 };

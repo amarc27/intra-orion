@@ -29,6 +29,14 @@ import AddKnowledge from './Knowledge/AddKnowledge';
 import EditKnowledge from './Knowledge/EditKnowledge';
 import SingleKnowledge from './Knowledge/SingleKnowledge';
 
+
+// Office hour
+import OfficeHours from './OfficeHours/OfficeHours.js';
+// import AddOfficeHours from './OfficeHours/AddOfficeHours';
+// import EditOfficeHours from './OfficeHours/EditOfficeHours';
+// import SingleOfficeHour from './OfficeHours/SingleOfficeHour';
+
+
 // Others
 import api from '../api';
 import logo from '../orion-bleu.png';
@@ -55,7 +63,7 @@ class App extends Component {
           <h1 className="App-title">Welcome to Orion</h1>
           <NavLink activeClassName="selected" to="/">Home</NavLink> 
           <NavLink activeClassName="selected" to="/people">People</NavLink> 
-          <NavLink activeClassName="selected" to="/office-hour">Office Hour</NavLink>
+          <NavLink activeClassName="selected" to="/office-hours">Office Hours</NavLink>
           <NavLink activeClassName="selected" to="/knowledge">Knowledge</NavLink>
           <NavLink activeClassName="selected" to="/tools">Tools</NavLink>
           <NavLink activeClassName="selected" to="/perks">Perks</NavLink>
@@ -88,6 +96,12 @@ class App extends Component {
           <Route path="/knowledge/add" exact component={AddKnowledge}/>
           <Route path="/knowledge/:id/edit" exact component={EditKnowledge}/>
           <Route path="/knowledge/:id" exact component={SingleKnowledge}/>
+
+          {/* OfficeHours */}
+          <Route path="/office-hours" exact component={OfficeHours} />
+          {/* <Route path="/office-hours/add" exact component={AddOfficeHours}/>
+          <Route path="/office-hours/:id/edit" exact component={EditOfficeHours}/>
+          <Route path="/office-hours/:id" exact component={SingleOfficeHour}/> */}
           
           {/* No route found */}
           <Route render={() => <h2>404</h2>} />
