@@ -9,7 +9,7 @@ const peopleSchema = new Schema({
   firstname: {type:String, required: [true, "A firstname is required"]},
   lastname: {type:String, required: [true, "A lastname is required"]},
   mobilePhone: {type:String, required: true},
-  role: {type: String, enum: ["Admin", "EIR", "Staff", "Founder", "Outter"]},
+  role: {type: String, enum: ["Admin", "EIR", "Staff", "Founder", "Outer"]},
   specialSkill: String,
   pictureUrl: String,
   position: String,

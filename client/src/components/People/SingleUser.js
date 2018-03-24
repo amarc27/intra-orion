@@ -54,6 +54,7 @@ class SingleUser extends Component {
       <div className="SingleUser">
         <h2>SingleUser</h2>
         <h3>Main infos</h3><br/>
+        <img className="picture-url picture-url-round" src={this.state.people.pictureUrl} alt=""/>
         <p> {this.state.people.firstname} {this.state.people.lastname} </p>
         <p> {this.state.people.email} </p>
         <p> {this.state.people.mobilePhone} </p>

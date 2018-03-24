@@ -32,10 +32,10 @@ import SingleKnowledge from './Knowledge/SingleKnowledge';
 
 // Office hour
 import OfficeHours from './OfficeHours/OfficeHours.js';
-// import AddOfficeHours from './OfficeHours/AddOfficeHours';
-// import EditOfficeHours from './OfficeHours/EditOfficeHours';
-// import SingleOfficeHour from './OfficeHours/SingleOfficeHour';
 
+
+// Admin
+import Admin from './Admin.js';
 
 // Others
 import api from '../api';
@@ -99,9 +99,9 @@ class App extends Component {
 
           {/* OfficeHours */}
           <Route path="/office-hours" exact component={OfficeHours} />
-          {/* <Route path="/office-hours/add" exact component={AddOfficeHours}/>
-          <Route path="/office-hours/:id/edit" exact component={EditOfficeHours}/>
-          <Route path="/office-hours/:id" exact component={SingleOfficeHour}/> */}
+
+          {/* Admin */}
+          <Route path="/admin" exact component={Admin} />          
           
           {/* No route found */}
           <Route render={() => <h2>404</h2>} />

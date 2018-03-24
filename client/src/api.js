@@ -50,6 +50,21 @@ export default {
       .catch(errHandler);      
   },
 
+  editPeoplePicture(peopleId, file) {
+    const formData = new FormData();
+    formData.append('picture', file)
+    formData.append('peopleId', peopleId)
+    const config = {
+      headers: {
+        'content-type': 'multipart/form-data'
+      }
+    }
+    return service
+      .post('/people/picture-one-people', formData, config)
+      .then(res => res.data)
+      .catch(errHandler);
+  },
+
 
 
 

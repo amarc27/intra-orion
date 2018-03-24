@@ -162,7 +162,10 @@ router.delete('/:id', (req, res) => {
 //     <input type="submit" value="Upload" />
 //   </form>
 router.post('/picture-one-people', parser.single('picture'), (req, res, next) => {
-  People.findOneAndUpdate({}, {pictureUrl: req.file.url })
+  console.log("DEBUG post('/picture-one-people'");
+  console.log("DEBUG req.body", req.body);
+  
+  People.findByIdAndUpdate( req.body.peopleId, {pictureUrl: req.file.url })
     .then(() => {
       res.json({
         success: true,

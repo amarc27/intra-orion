@@ -84,12 +84,32 @@ class EditPeople extends Component {
       })
   }
   
-  
+  handleInputFileChange (e) {
+
+    let id = this.props.match.params.id
+
+    this.setState({
+      pictureUrl: null
+    })
+
+    api.editPeoplePicture(id, e.target.files[0])
+      .then(data => {
+        console.log(data)
+        this.setState({
+          pictureUrl: data.pictureUrl
+        })
+      })
+  }
+
   render() {                
     return (
       <div className="EditPeople">
         <h2>Edit people</h2>
         <p>Edit</p>
+        {!this.state.pictureUrl && <div>Loading...</div>}
+        <img className="picture-url" src={this.state.pictureUrl} alt=""/><br/>
+        <input type="file" name="" id="" onChange={this.handleInputFileChange.bind(this)} /><br/>
+        <hr/>
         <form>
           firstname: <input type="text" value={this.state.firstname} onChange={(e) => {this.handleInputChange("firstname", e)}} /> <br/>
           lastname: <input type="text" value={this.state.lastname} onChange={(e) => {this.handleInputChange("lastname", e)}} /> <br/>
