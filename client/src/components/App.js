@@ -22,6 +22,13 @@ import AddTools from './Tools/AddTools';
 import EditTools from './Tools/EditTools';
 import SingleTool from './Tools/SingleTool';
 
+
+// Knowledge
+import Knowledge from './Knowledge/Knowledge';
+import AddKnowledge from './Knowledge/AddKnowledge';
+import EditKnowledge from './Knowledge/EditKnowledge';
+import SingleKnowledge from './Knowledge/SingleKnowledge';
+
 // Others
 import api from '../api';
 import logo from '../orion-bleu.png';
@@ -49,7 +56,7 @@ class App extends Component {
           <NavLink activeClassName="selected" to="/">Home</NavLink> 
           <NavLink activeClassName="selected" to="/people">People</NavLink> 
           <NavLink activeClassName="selected" to="/office-hour">Office Hour</NavLink>
-          <NavLink activeClassName="selected" to="/ressources">Ressources</NavLink>
+          <NavLink activeClassName="selected" to="/knowledge">Knowledge</NavLink>
           <NavLink activeClassName="selected" to="/tools">Tools</NavLink>
           <NavLink activeClassName="selected" to="/perks">Perks</NavLink>
           <NavLink activeClassName="selected" to="/candidates">Candidates</NavLink>
@@ -74,8 +81,14 @@ class App extends Component {
           <Route path="/tools" exact component={Tools} />
           <Route path="/tools/add" exact component={AddTools}/>
           <Route path="/tools/:id/edit" exact component={EditTools}/>
-          <Route path="/tools/:id" exact component={SingleTool}/>        
+          <Route path="/tools/:id" exact component={SingleTool}/>
 
+          {/* Knowledge */}
+          <Route path="/knowledge" exact component={Knowledge} />
+          <Route path="/knowledge/add" exact component={AddKnowledge}/>
+          <Route path="/knowledge/:id/edit" exact component={EditKnowledge}/>
+          <Route path="/knowledge/:id" exact component={SingleKnowledge}/>
+          
           {/* No route found */}
           <Route render={() => <h2>404</h2>} />
         </Switch>        

@@ -131,38 +131,38 @@ deleteTools(id) {
 
 
 
-// Ressources
-getRessources() {
+// Knowledge
+getKnowledge() {
   return service
-  .get('/tools')
+  .get('/knowledge')
   .then(res => res.data)
   .catch(errHandler);
 },
 
-postRessources(data) {
+postKnowledge(data) {
   return service
-    .post('/tools', data)
+    .post('/knowledge', data)
     .then(res => res.data)
     .catch(errHandler);
 },
 
-getSingleRessource(id) {
+getSingleKnowledge(id) {
   return service
-    .get('/tools/' + id)
+    .get('/knowledge/' + id)
     .then(res => res.data)
     .catch(errHandler);      
 },
 
-editRessources(id, data) {
+editKnowledge(id, data) {
   return service
-    .put('/tools/' + id, data)
+    .put('/knowledge/' + id, data)
     .then(res => res.data)
     .catch(errHandler);
 },
 
-deleteRessources(id) {
+deleteKnowledge(id) {
   return service
-    .delete('/tools/' + id)
+    .delete('/knowledge/' + id)
     .then(res => res.data)
     .catch(errHandler);      
 },

@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Ressource = require('../models/ressource');
+const Knowledge = require('../models/knowledge');
 const passport = require('passport');
 const config = require('../config');
 const mongoose = require("mongoose");
@@ -19,30 +19,30 @@ const storage = cloudinaryStorage({
 const parser = multer({ storage });
 
 
-// Route to get all ressources
+// Route to get all knowledge
 router.get('/', (req, res, next) => {
-  Ressource.find()
-    .then(ressources => {
-      res.json(ressources)
+  Knowledge.find()
+    .then(knowledge => {
+      res.json(knowledge)
     })
 });
 
 
 
-//GET a single ressource
+//GET a single knowledge
 router.get('/:id', (req, res) => {
   if(!mongoose.Types.ObjectId.isValid(req.params.id)) {
     res.status(400).json({ message: 'Specified id is not valid' });
     return;
   }
   
-  Ressource.findById(req.params.id, (err, ressource) => {
+  Knowledge.findById(req.params.id, (err, knowledge) => {
       if (err) {
         res.json(err);
         return;
       }
 
-      res.json(ressource);
+      res.json(knowledge);
     });
 });
 
@@ -50,9 +50,9 @@ router.get('/:id', (req, res) => {
 
 
 
-// Route to add a ressource
+// Route to add a knowledge
 router.post('/', (req, res, next) => {
-  const ressource = new Ressource({
+  const knowledge = new Knowledge({
     category: req.body.category,
     title: req.body.title,
     pictureUrl: req.body.pictureUrl,
@@ -60,22 +60,22 @@ router.post('/', (req, res, next) => {
     link: req.body.link
   });
 
-  ressource.save((err) => {
+  knowledge.save((err) => {
     if (err) {
       res.json(err);
       return;
     }
 
     res.json({
-      message: 'New ressource created!',
-      id: ressource._id
+      message: 'New knowledge created!',
+      id: knowledge._id
     });
   });
 });
 
 
 
-/* EDIT a ressource. */
+/* EDIT a knowledge. */
 router.put('/:id', (req, res) => {
   if(!mongoose.Types.ObjectId.isValid(req.params.id)) {
     res.status(400).json({ message: 'Specified id is not valid' });
@@ -90,14 +90,14 @@ router.put('/:id', (req, res) => {
     link: req.body.link
   };
   
-  Ressource.findByIdAndUpdate(req.params.id, updates, (err) => {
+  Knowledge.findByIdAndUpdate(req.params.id, updates, (err) => {
     if (err) {
       res.json(err);
       return;
     }
 
     res.json({
-      message: 'Ressource updated successfully'
+      message: 'Knowledge updated successfully'
     });
   });
 })
@@ -105,21 +105,21 @@ router.put('/:id', (req, res) => {
 
 
 
-/* DELETE a ressource. */
+/* DELETE a knowledge. */
 router.delete('/:id', (req, res) => {
   if(!mongoose.Types.ObjectId.isValid(req.params.id)) {
     res.status(400).json({ message: 'Specified id is not valid' });
     return;
   }
   
-  Ressource.remove({ _id: req.params.id }, (err) => {
+  Knowledge.remove({ _id: req.params.id }, (err) => {
     if (err) {
       res.json(err);
       return;
     }
 
     return res.json({
-      message: 'Ressource has been removed!'
+      message: 'Knowledge has been removed!'
     });
   })
 });
@@ -141,7 +141,7 @@ router.delete('/:id', (req, res) => {
 //     <input type="submit" value="Upload" />
 //   </form>
 router.post('/picture-one-user', parser.single('picture'), (req, res, next) => {
-    Ressource.findOneAndUpdate({}, {pictureUrl: req.file.url })
+  Knowledge.findOneAndUpdate({}, {pictureUrl: req.file.url })
     .then(() => {
       res.json({
         success: true,
