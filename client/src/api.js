@@ -12,6 +12,8 @@ const errHandler = err => {
 export default {
   service: service,
   
+
+// PEOPLE
   getPeople() {
     return service
     .get('/people')
@@ -26,13 +28,6 @@ export default {
       .catch(errHandler);
   },
 
-  editPeople(id, data) {
-    return service
-      .put('/people/' + id, data)
-      .then(res => res.data)
-      .catch(errHandler);
-  },
-
   getSingleUser(id) {
     return service
       .get('/people/' + id)
@@ -40,11 +35,57 @@ export default {
       .catch(errHandler);      
   },
 
+  editPeople(id, data) {
+    return service
+      .put('/people/' + id, data)
+      .then(res => res.data)
+      .catch(errHandler);
+  },
+
   deletePeople(id) {
     return service
       .delete('/people/' + id)
       .then(res => res.data)
       .catch(errHandler);      
-  }
+  },
+
+
+
+// PERKS
+  getPerks() {
+    return service
+    .get('/perks')
+    .then(res => res.data)
+    .catch(errHandler);
+  },
+
+  postPerks(data) {
+    return service
+      .post('/perks', data)
+      .then(res => res.data)
+      .catch(errHandler);
+  },
+
+  getSinglePerk(id) {
+    return service
+      .get('/perks/' + id)
+      .then(res => res.data)
+      .catch(errHandler);      
+  },
+
+  editPerks(id, data) {
+    return service
+      .put('/perks/' + id, data)
+      .then(res => res.data)
+      .catch(errHandler);
+  },
+
+  deletePerks(id) {
+    return service
+      .delete('/perks/' + id)
+      .then(res => res.data)
+      .catch(errHandler);      
+  },
+
 
 };

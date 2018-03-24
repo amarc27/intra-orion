@@ -2,8 +2,8 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const candidateSchema = new Schema({
-  skill: {enum: ["Dev", "Design", "Sales", "Finance"]},
-  contract: {enum: ["Fulltime", "Internship", "Prestataire"]},
+  skill: {type: String, enum: ["Dev", "Design", "Sales", "Finance"]},
+  contract: {type: String, enum: ["Fulltime", "Internship", "Prestataire"]},
 //   date:
   firstname: {type:String, required: [true, "A firstname is required"]},
   lastname: {type:String, required: [true, "A lastname is required"]},

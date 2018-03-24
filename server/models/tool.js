@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
-const perkSchema = new Schema({
+const toolSchema = new Schema({
   name: {type:String, required: [true, "A name is required"]},
   pictureUrl: String,
   description: {type:String, required: [true, "A description is required"]},  
@@ -10,4 +10,4 @@ const perkSchema = new Schema({
   timestamps: { createdAt: "created_at", updatedAt: "updated_at" }
 });
 
-module.exports = mongoose.model('Perk', perkSchema);
+module.exports = mongoose.model('Tool', toolSchema);
