@@ -13,6 +13,7 @@ export default {
   service: service,
   
 
+
 // PEOPLE
   getPeople() {
     return service
@@ -51,6 +52,7 @@ export default {
 
 
 
+
 // PERKS
   getPerks() {
     return service
@@ -86,6 +88,84 @@ export default {
       .then(res => res.data)
       .catch(errHandler);      
   },
+
+
+
+  
+// TOOLS
+getTools() {
+  return service
+  .get('/tools')
+  .then(res => res.data)
+  .catch(errHandler);
+},
+
+postTools(data) {
+  return service
+    .post('/tools', data)
+    .then(res => res.data)
+    .catch(errHandler);
+},
+
+getSingleTool(id) {
+  return service
+    .get('/tools/' + id)
+    .then(res => res.data)
+    .catch(errHandler);      
+},
+
+editTools(id, data) {
+  return service
+    .put('/tools/' + id, data)
+    .then(res => res.data)
+    .catch(errHandler);
+},
+
+deleteTools(id) {
+  return service
+    .delete('/tools/' + id)
+    .then(res => res.data)
+    .catch(errHandler);      
+},
+
+
+
+
+// Ressources
+getRessources() {
+  return service
+  .get('/tools')
+  .then(res => res.data)
+  .catch(errHandler);
+},
+
+postRessources(data) {
+  return service
+    .post('/tools', data)
+    .then(res => res.data)
+    .catch(errHandler);
+},
+
+getSingleRessource(id) {
+  return service
+    .get('/tools/' + id)
+    .then(res => res.data)
+    .catch(errHandler);      
+},
+
+editRessources(id, data) {
+  return service
+    .put('/tools/' + id, data)
+    .then(res => res.data)
+    .catch(errHandler);
+},
+
+deleteRessources(id) {
+  return service
+    .delete('/tools/' + id)
+    .then(res => res.data)
+    .catch(errHandler);      
+},
 
 
 };

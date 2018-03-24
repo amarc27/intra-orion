@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import axios from 'axios';
 // import { Route, Switch, NavLink, Link } from 'react-router-dom';
 import api from '../../api';
-// import './EditPerks.css';
+// import './EditTools.css';
 
 
-class EditPerks extends Component {
+class EditTools extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -28,13 +28,13 @@ class EditPerks extends Component {
   componentDidMount(props) {
     let id = this.props.match.params.id
     
-    api.getSinglePerk(id)
-      .then(perks => {
+    api.getSingleTool(id)
+      .then(tools => {
         this.setState({
-          name: perks.name,
-          pictureUrl: perks.pictureUrl,
-          category: perks.category,
-          description: perks.description,
+          name: tools.name,
+          pictureUrl: tools.pictureUrl,
+          category: tools.category,
+          description: tools.description,
         })
       })
       .catch(err => {
@@ -53,14 +53,14 @@ class EditPerks extends Component {
 
     let id = this.props.match.params.id;
   
-    api.editPerks(id, data)
+    api.editTools(id, data)
       .then(result => {
         this.setState({
           name: "",
           pictureUrl: "",
           category: "",
           description: "",
-          message: `Your perk '${this.state.name}' has been modified`
+          message: `Your tool '${this.state.name}' has been modified`
         })
         setTimeout(() => {
           this.setState({
@@ -75,8 +75,8 @@ class EditPerks extends Component {
   
   render() {                
     return (
-      <div className="EditPerks">
-        <h2>Edit perks</h2>
+      <div className="EditTools">
+        <h2>Edit tools</h2>
         <p>Edit</p>
         <form>
           name: <input type="text" value={this.state.name} onChange={(e) => {this.handleInputChange("name", e)}} /> <br/>
@@ -97,4 +97,4 @@ class EditPerks extends Component {
   }
 }
 
-export default EditPerks;
+export default EditTools;

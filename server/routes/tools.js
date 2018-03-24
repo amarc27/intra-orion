@@ -145,7 +145,7 @@ router.delete('/:id', (req, res) => {
 //     <input type="submit" value="Upload" />
 //   </form>
 router.post('/picture-one-user', parser.single('picture'), (req, res, next) => {
-  Perk.findOneAndUpdate({}, {pictureUrl: req.file.url })
+  Tool.findOneAndUpdate({}, {pictureUrl: req.file.url })
     .then(() => {
       res.json({
         success: true,

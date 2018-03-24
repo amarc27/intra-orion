@@ -14,6 +14,7 @@ var companiesRoutes = require('./routes/companies');
 var perkRoutes = require('./routes/perks');
 var candidateSchema = require('./routes/candidates');
 var ressourceSchema = require('./routes/ressources');
+var toolSchema = require('./routes/tools');
 
 require('./configs/database');
 
@@ -66,6 +67,7 @@ app.use('/api/companies', companiesRoutes);
 app.use('/api/perks', perkRoutes);
 app.use('/api/candidates', candidateSchema);
 app.use('/api/ressources', ressourceSchema);
+app.use('/api/tools', toolSchema);
 
 
 // For any routes that starts with "/api", catch 404 and forward to error handler

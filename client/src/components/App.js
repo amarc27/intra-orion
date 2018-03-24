@@ -15,9 +15,21 @@ import AddPerks from './Perks/AddPerks';
 import EditPerks from './Perks/EditPerks';
 import SinglePerk from './Perks/SinglePerk';
 
+
+// Tools
+import Tools from './Tools/Tools';
+import AddTools from './Tools/AddTools';
+import EditTools from './Tools/EditTools';
+import SingleTool from './Tools/SingleTool';
+
+// Others
 import api from '../api';
 import logo from '../orion-bleu.png';
 import './App.css';
+
+
+
+
 
 
 
@@ -45,16 +57,26 @@ class App extends Component {
         </header>
         <Switch>
           <Route path="/" exact component={Home} />
+
+          {/* People */}
           <Route path="/people" exact component={People} />
           <Route path="/people/add" exact component={AddPeople}/>
           <Route path="/people/:id/edit" exact component={EditPeople}/>
           <Route path="/people/:id" exact component={SingleUser}/>
 
+          {/* Perks */}
           <Route path="/perks" exact component={Perks} />
           <Route path="/perks/add" exact component={AddPerks}/>
           <Route path="/perks/:id/edit" exact component={EditPerks}/>
           <Route path="/perks/:id" exact component={SinglePerk}/>        
 
+          {/* Tools */}
+          <Route path="/tools" exact component={Tools} />
+          <Route path="/tools/add" exact component={AddTools}/>
+          <Route path="/tools/:id/edit" exact component={EditTools}/>
+          <Route path="/tools/:id" exact component={SingleTool}/>        
+
+          {/* No route found */}
           <Route render={() => <h2>404</h2>} />
         </Switch>        
       </div>

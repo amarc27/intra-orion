@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import axios from 'axios';
 // import { Route, Switch, NavLink, Link } from 'react-router-dom';
 import api from '../../api';
-// import './EditPerks.css';
+// import './Tools/AddTools.css';
 
 
-class EditPerks extends Component {
+class AddTools extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -24,43 +24,23 @@ class EditPerks extends Component {
     this.setState(newState)
   }
 
-
-  componentDidMount(props) {
-    let id = this.props.match.params.id
-    
-    api.getSinglePerk(id)
-      .then(perks => {
-        this.setState({
-          name: perks.name,
-          pictureUrl: perks.pictureUrl,
-          category: perks.category,
-          description: perks.description,
-        })
-      })
-      .catch(err => {
-      }) 
-  }
-
-
   handleClick(e) {
     e.preventDefault()
     let data = {
       name: this.state.name,
       pictureUrl: this.state.pictureUrl,
       category: this.state.category,
-      description: this.state.description,
+      description: this.state.description,            
     }
 
-    let id = this.props.match.params.id;
-  
-    api.editPerks(id, data)
+    api.postTools(data)
       .then(result => {
         this.setState({
           name: "",
           pictureUrl: "",
           category: "",
           description: "",
-          message: `Your perk '${this.state.name}' has been modified`
+          message: `Your tool '${this.state.name}' has been created`
         })
         setTimeout(() => {
           this.setState({
@@ -75,19 +55,18 @@ class EditPerks extends Component {
   
   render() {                
     return (
-      <div className="EditPerks">
-        <h2>Edit perks</h2>
-        <p>Edit</p>
+      <div className="AddTools">
+        <h2>Add tools</h2>
         <form>
           name: <input type="text" value={this.state.name} onChange={(e) => {this.handleInputChange("name", e)}} /> <br/>
           pictureUrl: <input type="text" value={this.state.pictureUrl} onChange={(e) => {this.handleInputChange("pictureUrl", e)}} /> <br/>
           category: <input type="text" value={this.state.category} onChange={(e) => {this.handleInputChange("category", e)}} /> <br/>
           description: <input type="text" value={this.state.description} onChange={(e) => {this.handleInputChange("description", e)}} /> <br/>
-          <button onClick={(e) => this.handleClick(e)}>Modify perk</button>
+          <button onClick={(e) => this.handleClick(e)}>Create perk</button>
         </form>
         <div style={{
           margin: 10,
-          backgroundColor: "blue",
+          backgroundColor: "red",
           display: this.state.message ? "block" : "none"
         }}>
           {this.state.message}
@@ -97,4 +76,4 @@ class EditPerks extends Component {
   }
 }
 
-export default EditPerks;
+export default AddTools;
