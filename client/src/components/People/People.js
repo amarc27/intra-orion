@@ -27,7 +27,7 @@ class People extends Component {
       <div className="People">
         <h2>People</h2>
         <p>This is a list of all the people linked with Orion</p>
-        {this.state.people.map((c, i) => <li key={i}>  <Link to={'/people/'+ c._id}>{c.firstname} {c.lastname}</Link> | <Link to={'/people/' + c._id + '/edit'}>Edit</Link> </li>)} <br/>
+        {this.state.people.map((c, i) => <li key={i}>  <Link to={'/people/'+ c._id}>{c.firstname} {c.lastname}</Link> </li>)} <br/>
         <Link to="/people/add"><button name="add-people" type="submit">Add people</button></Link>        
       </div>
     );

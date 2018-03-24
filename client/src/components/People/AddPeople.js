@@ -55,7 +55,7 @@ class AddPeople extends Component {
           this.setState({
             message: null
           })
-        }, 2000)
+        }, 1000)
       })
       .catch(err => {
       })

@@ -24,13 +24,12 @@ class EditPeople extends Component {
     let newState = {}
     newState[stateFieldName] = event.target.value
   
-    // this.setState(newState)
+    this.setState(newState)
   }
 
 
   componentDidMount(props) {
     let id = this.props.match.params.id
-    console.log("DEBUG");
     
     api.getSingleUser(id)
       .then(people => {

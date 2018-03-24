@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-// import { Route, Switch, NavLink, Link } from 'react-router-dom';
+import { Route, Switch, NavLink, Link } from 'react-router-dom';
 import api from '../../api';
 // import './SingleUser.css';
 
@@ -33,7 +33,7 @@ class SingleUser extends Component {
           this.setState({
             message: null
           })
-        }, 2000)
+        }, 1000)
       })
     }
 
@@ -59,6 +59,7 @@ class SingleUser extends Component {
         <p> {this.state.people.mobilePhone} </p>
         {/* <p> {this.state.people.role.enum} </p> */}
 
+        <Link to={'/people/' + this.state.people._id + '/edit'}>Edit</Link> <br/>
         <button type="submit" onClick={(e) => this.handleClick(e)}>Delete</button>
         <div style={{
           margin: 10,
