@@ -52,8 +52,8 @@ class Admin extends Component {
       <div className="Admin">
         <h2>Admin</h2>
         <form>
-          firstname: <input type="text" value={this.state.firstname} onChange={(e) => {this.handleInputChange("firstname", e)}} /> <br/>
-          email: <input type="text" value={this.state.email} onChange={(e) => {this.handleInputChange("email", e)}} /> <br/>
+          Firstname: <input type="text" value={this.state.firstname} onChange={(e) => {this.handleInputChange("firstname", e)}} /> <br/>
+          Email: <input type="text" value={this.state.email} onChange={(e) => {this.handleInputChange("email", e)}} /> <br/>
 
           <select name="roles">
             <option value="admin">Admin</option>
@@ -63,7 +63,7 @@ class Admin extends Component {
             <option value="Outer">Outer</option>
           </select>
           <br/>
-          <button onClick={(e) => this.handleClick(e)}>Create people</button>
+          <button onClick={(e) => this.handleClick(e)}>Send request</button>
         </form>
         <div style={{
           margin: 10,

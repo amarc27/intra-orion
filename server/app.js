@@ -12,9 +12,10 @@ var authRoutes = require('./routes/auth');
 var peoplesRoutes = require('./routes/peoples');
 var companiesRoutes = require('./routes/companies');
 var perkRoutes = require('./routes/perks');
-var candidateSchema = require('./routes/candidates');
-var knowledgeSchema = require('./routes/knowledge');
-var toolSchema = require('./routes/tools');
+var candidateRoutes = require('./routes/candidates');
+var knowledgeRoutes = require('./routes/knowledge');
+var toolRoutes = require('./routes/tools');
+var mailRoutes = require('./routes/mail');
 
 require('./configs/database');
 
@@ -65,9 +66,10 @@ app.use('/api', authRoutes);
 app.use('/api/people', peoplesRoutes);
 app.use('/api/companies', companiesRoutes);
 app.use('/api/perks', perkRoutes);
-app.use('/api/candidates', candidateSchema);
-app.use('/api/knowledge', knowledgeSchema);
-app.use('/api/tools', toolSchema);
+app.use('/api/candidates', candidateRoutes);
+app.use('/api/knowledge', knowledgeRoutes);
+app.use('/api/tools', toolRoutes);
+app.use('/api/admin/invite', mailRoutes);
 
 
 // For any routes that starts with "/api", catch 404 and forward to error handler
