@@ -5,6 +5,10 @@ import './index.css';
 import App from './components/App';
 import registerServiceWorker from './registerServiceWorker';
 
+// import 'bootstrap/dist/css/bootstrap.min.css';
+import './styles/index.css';
+
+
 ReactDOM.render((
   <BrowserRouter>
     <App />
