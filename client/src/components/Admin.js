@@ -3,6 +3,7 @@ import axios from 'axios';
 // import { Route, Switch, NavLink, Link } from 'react-router-dom';
 import api from './../api';
 // import './Admin.css';
+// import { Container, DropdownToggle, DropdownMenu, DropdownItem, Dropdown } from 'reactstrap';
 
 
 class Admin extends Component {
@@ -11,11 +12,14 @@ class Admin extends Component {
     this.state = {
       firstname: "",
       email: "",
+      role: "",
       message: null
     }
+    console.log('okokokokok')
   }
 
   handleInputChange(stateFieldName, event) {
+    console.log('input')
     let newState = {}
     newState[stateFieldName] = event.target.value
   
@@ -24,23 +28,30 @@ class Admin extends Component {
 
   handleClick(e) {
     e.preventDefault()
-    let data = {
-      firstname: this.state.firstname,      
-      email: this.state.email,
-    }
+    var ev = document.getElementById("roleDropdown");
+    console.log('click', ev.options[ev.selectedIndex].value)
+    var strUser = ev.options[ev.selectedIndex].value;
+    this.setState({ role: strUser });
 
-    api.postPeople(data)
+    let data = {
+      firstname: this.state.firstname,
+      email: this.state.email,
+      role: strUser
+    }
+    
+    api.postSendMail(data)
       .then(result => {
         this.setState({
           firstname: "",
           email: "",
-          message: `The invitation for '${this.state.firstname}' has been sent`
+          role: "",
+          message: `Your people '${this.state.firstname} (${this.state.email}, ${this.state.role})' has been invited`
         })
         setTimeout(() => {
           this.setState({
             message: null
           })
-        }, 1000)
+        }, 1500)
       })
       .catch(err => {
       })
@@ -55,19 +66,20 @@ class Admin extends Component {
           Firstname: <input type="text" value={this.state.firstname} onChange={(e) => {this.handleInputChange("firstname", e)}} /> <br/>
           Email: <input type="text" value={this.state.email} onChange={(e) => {this.handleInputChange("email", e)}} /> <br/>
 
-          <select name="roles">
-            <option value="admin">Admin</option>
+          <select name="role" id="roleDropdown">
+            <option value="Admin">Admin</option>
             <option value="EIR">EIR</option>
             <option value="Staff">Staff</option>
             <option value="Founder">Founder</option>
             <option value="Outer">Outer</option>
           </select>
-          <br/>
+
+          <br/><br/>
           <button onClick={(e) => this.handleClick(e)}>Send request</button>
         </form>
         <div style={{
           margin: 10,
-          backgroundColor: "red",
+          backgroundColor: "yellow",
           display: this.state.message ? "block" : "none"
         }}>
           {this.state.message}

@@ -32,6 +32,10 @@ class OfficeHours extends Component {
         <p>This is a list of EIR</p>
         {this.state.people.map((c, i) => <li key={i}>  <Link to={'/people/'+ c._id}>{c.firstname} {c.lastname}</Link> </li>)} <br/>
         <Link to="/people/add"><button name="add-people" type="submit">Add people</button></Link>
+
+        <hr/>
+
+        <div className="calendly-inline-widget" data-url="https://calendly.com/antoinefl-marc/30min" style={{minWidth:320,height:580}}></div>
       </div>
     );
   }

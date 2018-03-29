@@ -193,4 +193,23 @@ getSpecificPeople() {
   .catch(errHandler);
 },
 
+
+// Admin --> Invite new
+postSendMail(data) {
+  return service
+    .post('/people', data)
+    .then(res => res.data)
+    .catch(errHandler);
+},
+
+
+// Signup
+postSignup(data) {
+  return service
+    .post('/signup', data)
+    .then(res => res.data)
+    .catch(errHandler);
+}
+
+
 };

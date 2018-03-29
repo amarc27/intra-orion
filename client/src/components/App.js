@@ -37,6 +37,9 @@ import OfficeHours from './OfficeHours/OfficeHours.js';
 // Admin
 import Admin from './Admin.js';
 
+// Signup
+import Signup from './Signup'
+
 // Others
 import api from '../api';
 import logo from '../orion-bleu.png';
@@ -69,6 +72,7 @@ class App extends Component {
           <NavLink activeClassName="selected" to="/perks">Perks</NavLink>
           <NavLink activeClassName="selected" to="/candidates">Candidates</NavLink>
           <NavLink activeClassName="selected" to="/admin">Admin</NavLink>
+          <NavLink activeClassName="selected" to="/signup">Signup</NavLink>
         </header>
         <Switch>
           <Route path="/" exact component={Home} />
@@ -101,7 +105,10 @@ class App extends Component {
           <Route path="/office-hours" exact component={OfficeHours} />
 
           {/* Admin */}
-          <Route path="/admin" exact component={Admin} />          
+          <Route path="/admin" exact component={Admin} />
+
+          {/* Signup */}
+          <Route path="/signup" exact component={Signup} />
           
           {/* No route found */}
           <Route render={() => <h2>404</h2>} />

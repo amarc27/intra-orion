@@ -5,11 +5,17 @@ const passport = require('passport');
 const config = require('../config');
 const mongoose = require("mongoose");
 const randomstring = require("randomstring");
+var mailgun = require("mailgun-js");
 
+var api_key = process.env.MAILGUN_API_KEY;
+var DOMAIN = process.env.MAILGUN_DOMAIN;
+var mailgun = require('mailgun-js')({apiKey: api_key, domain: DOMAIN});
 
 const cloudinary = require('cloudinary');
 const cloudinaryStorage = require('multer-storage-cloudinary');
 const multer = require('multer');
+
+require('dotenv').config();
 
 const storage = cloudinaryStorage({
   cloudinary,
@@ -54,9 +60,26 @@ router.get('/:id', (req, res) => {
 
 
 
-// Route to add a people
+// Route to add a people by sending an email
 router.post('/', (req, res, next) => {
-  console.log(req.body);
+  var signupSecret = randomstring.generate()
+  
+  var mailData = {
+    from: 'Antoine @Orion <antoine@orionth.co>',
+    to: req.body.email,
+    subject: 'Welcome, ' + req.body.firstname,
+    html: `
+      <html> 
+        <h2>Welcome to Orion family 🔥 </h2> 
+        <p>To register yourself, you need to sign up on 
+          <a href='http://localhost:3000/signup?email=${req.body.email}&signupSecret=${signupSecret}'>this page</a>, 
+          using this log :
+        </p>
+        <p><strong>Login</strong> : ${req.body.email} </p>
+        <p>See you soon, my friend ❤️</p> 
+      </html>`
+  };
+
   const people = new People({
     firstname: req.body.firstname,
     lastname: req.body.lastname,
@@ -72,7 +95,6 @@ router.post('/', (req, res, next) => {
   people.save((err) => {
     if (err) {
       console.log(err);
-      
       res.json(err);
       return;
     }
@@ -81,6 +103,12 @@ router.post('/', (req, res, next) => {
       message: 'New people created!',
       id: people._id
     });
+  });
+
+  mailgun.messages().send(mailData, function (error, body) {
+    if (error) {
+      console.log(error)
+    }
   });
 });
 

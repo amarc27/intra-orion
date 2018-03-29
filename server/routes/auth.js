@@ -12,8 +12,11 @@ router.post('/signup', (req, res, next) => {
   // extract the info we need from the body of the request
   const { email, firstname, mobilePhone, lastname, password, signupSecret } = req.body;
 
+  console.log("DEBUG email, signupSecret", email, signupSecret);
+  
+
   //Chercher utilisateur via son email et son signupSecret
-  People.findOne( {email: email, signupSecret})
+  People.findOneAndUpdate( {email, signupSecret}, { verified: true, email, firstname, mobilePhone, lastname, password })
     .then(people => {
       if (!people)
         return next(new Error("No people found"))
@@ -33,23 +36,6 @@ router.post('/signup', (req, res, next) => {
     .catch( (err) => {
       next(err)
     });
-
-    // [
-    //   check('email')
-    //     .isEmail() .withMessage('Email is required') .trim(),
-    
-    //   check('password')
-    //     .withMessage('Password is required') .trim(),
-
-    //   check('firstname')
-    //     .withMessage('Firstname is required') .trim(),
-      
-    //   check('lastname')
-    //     .withMessage('Lastname is required') .trim(),
-
-    //   check('mobilePhone')
-    //     .withMessage('Mobile phone is required') .trim()
-    // ]
 });
 
 
