@@ -8,7 +8,7 @@ const peopleSchema = new Schema({
   // salt: String, // Defined with passportLocalMongoose
   firstname: {type:String, required: [false, "A firstname is required"]},
   lastname: {type:String, required: [false, "A lastname is required"]},
-  email: "",
+  email: {type: String, unique: false},
   mobilePhone: {type:String, required: false},
   role: {type: String, enum: ["Admin", "EIR", "Staff", "Founder", "Outer"]},
   specialSkill: String,

@@ -89,7 +89,7 @@ router.post('/', (req, res, next) => {
     position: req.body.position,
     _company: req.body._company,
     email: req.body.email,
-    signupSecret: randomstring.generate()
+    signupSecret: signupSecret
   });
 
   people.save((err) => {
@@ -112,10 +112,13 @@ router.post('/', (req, res, next) => {
   });
 });
 
-
+// TODO: only ADMIN can delete/edit
 
 /* EDIT a people. */
-router.put('/:id', (req, res) => {
+router.put('/:id', passport.authenticate("jwt", config.jwtSession), (req, res, next) => {
+  if (req.user.role !== 'Admin')
+    return next(new Error("You are not an admin bitch!"));
+  
   if(!mongoose.Types.ObjectId.isValid(req.params.id)) {
     res.status(400).json({ message: 'Specified id is not valid' });
     return;

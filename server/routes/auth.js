@@ -10,17 +10,13 @@ const { sanitizeBody } = require('express-validator/filter');
 
 router.post('/signup', (req, res, next) => {
   // extract the info we need from the body of the request
-  const { email, firstname, mobilePhone, lastname, password, signupSecret } = req.body;
-
-  console.log("DEBUG email, signupSecret", email, signupSecret);
-  
+  const { email, firstname, mobilePhone, lastname, password, signupSecret } = req.body;  
 
   //Chercher utilisateur via son email et son signupSecret
-  People.findOneAndUpdate( {email, signupSecret}, { verified: true, email, firstname, mobilePhone, lastname, password })
+  People.findOneAndUpdate( {email, signupSecret}, {$set: { verified: true, email, firstname, mobilePhone, lastname, password }})
     .then(people => {
       if (!people)
         return next(new Error("No people found"))
-      console.log("Success", people);
 
       //Permettre au people de changer son password
       people.setPassword(password, (err, doc) => {
@@ -73,7 +69,9 @@ router.post('/login', (req, res, next) => {
         const token = jwt.encode(payload, config.jwtSecret);
         res.json({
           token,
+          role: people.role,
           name: people.name,
+          success: true
         });
       }
     });

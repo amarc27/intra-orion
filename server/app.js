@@ -15,6 +15,8 @@ var perkRoutes = require('./routes/perks');
 var candidateRoutes = require('./routes/candidates');
 var knowledgeRoutes = require('./routes/knowledge');
 var toolRoutes = require('./routes/tools');
+const People = require('./models/people');
+
 
 require('./configs/database');
 
@@ -47,6 +49,10 @@ const strategy = new Strategy(
   (payload, done) => {
     // payload is the object we encrypted at the route /api/token
     // We get the user id, make sure the user exist by looking it up
+
+    console.log("DEBUG payload", payload);
+    
+
     People.findById(payload.id).then(people => {
       if (people) {
         // make the people accessible in req.people

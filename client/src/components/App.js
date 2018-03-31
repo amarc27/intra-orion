@@ -38,7 +38,10 @@ import OfficeHours from './OfficeHours/OfficeHours.js';
 import Admin from './Admin.js';
 
 // Signup
-import Signup from './Signup'
+import Signup from './Signup';
+
+// Login
+import Login from './Login';
 
 // Others
 import api from '../api';
@@ -56,7 +59,14 @@ class App extends Component {
     super(props)
     this.state = {
     }
+    api.loadUser();
   }
+
+  handleLogoutClick(e) {
+    api.logout()
+  }
+
+
 
   render() {                
     return (
@@ -71,8 +81,15 @@ class App extends Component {
           <NavLink activeClassName="selected" to="/tools">Tools</NavLink>
           <NavLink activeClassName="selected" to="/perks">Perks</NavLink>
           <NavLink activeClassName="selected" to="/candidates">Candidates</NavLink>
+          
           <NavLink activeClassName="selected" to="/admin">Admin</NavLink>
-          <NavLink activeClassName="selected" to="/signup">Signup</NavLink>
+
+          {!api.isLoggedIn() && <Link to="/signup">Signup</Link> }
+          {!api.isLoggedIn() && <Link to="/login">Login</Link> }
+          {api.isLoggedIn() && <Link to="/" onClick={(e) => this.handleLogoutClick(e)}>Logout</Link> }
+          {/* <NavLink activeClassName="selected" to="/signup">Signup</NavLink>
+          <NavLink activeClassName="selected" to="/login">Login</NavLink>
+          <NavLink activeClassName="selected" to="/logout">Logout</NavLink> */}
         </header>
         <Switch>
           <Route path="/" exact component={Home} />
@@ -109,6 +126,9 @@ class App extends Component {
 
           {/* Signup */}
           <Route path="/signup" exact component={Signup} />
+           
+           {/* Login */}
+           <Route path="/login" exact component={Login} />
           
           {/* No route found */}
           <Route render={() => <h2>404</h2>} />

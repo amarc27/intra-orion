@@ -60,8 +60,12 @@ class SingleUser extends Component {
         <p> {this.state.people.mobilePhone} </p>
         <p> {this.state.people.role} </p>
 
-        <Link to={'/people/' + this.state.people._id + '/edit'}>Edit</Link> <br/>
-        <button type="submit" onClick={(e) => this.handleClick(e)}>Delete</button>
+        {api.isAdmin() && (
+          <div>
+            <Link to={'/people/' + this.state.people._id + '/edit'}>Edit</Link> <br/>
+            <button type="submit" onClick={(e) => this.handleClick(e)}>Delete</button>
+          </div>
+        )}
         <div style={{
           margin: 10,
           backgroundColor: "green",
