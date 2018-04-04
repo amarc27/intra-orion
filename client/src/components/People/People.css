@@ -1,0 +1,19 @@
+.default-picture {
+  height: 286px;
+  background-color: brown;
+  color: white;
+  font-size: 50px;
+  line-height: 286px;
+}
+
+.people-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 10px 80px;
+}
+
+.card-img-top {
+  object-fit: cover;
+  height: 286px;
+}

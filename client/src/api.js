@@ -260,6 +260,23 @@ isAdmin() {
   if (!userData) return false;
   const user = JSON.parse(userData);
   return user.role === "Admin"; 
+},
+
+
+
+// POST Add company
+postCompany(data) {
+  return service
+    .post('/companies', data)
+    .then(res => res.data)
+    .catch(errHandler);
+},
+
+getCompanies() {
+  return service
+    .get('/companies')
+    .then(res => res.data)
+    .catch(errHandler);
 }
 
 };

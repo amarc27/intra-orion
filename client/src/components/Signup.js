@@ -22,8 +22,7 @@ class Signup extends Component {
       signupSecret: "",
       message: null,
       password: "",
-      password2: "",
-
+      password2: ""
     }
   }
 

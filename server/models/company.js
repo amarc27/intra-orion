@@ -2,11 +2,11 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const companySchema = new Schema({
-  name: {type:String, required: [true, "A name is required"]},
+  name: {type:String},
   pictureUrl: String,
-  description: {type:String, required: [true, "A description is required"]},  
+  description: {type:String},  
   _employees: [{ type: Schema.Types.ObjectId, ref: 'People' }],
-  website: {type:String, required: [true, "A website url is required"]},
+  website: {type:String},
   role: {type: String, enum: ["Startup", "Investor", "EntInRes", "Outter"]},
   sector: {type: String, enum: ["BioTech", "Edtech", "FinTech", "SexTech"]},
 }, {

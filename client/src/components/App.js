@@ -73,7 +73,6 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to Orion</h1>
           <NavLink activeClassName="selected" to="/">Home</NavLink> 
           <NavLink activeClassName="selected" to="/people">People</NavLink> 
           <NavLink activeClassName="selected" to="/office-hours">Office Hours</NavLink>

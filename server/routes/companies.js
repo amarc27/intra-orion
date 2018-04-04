@@ -58,13 +58,14 @@ router.post('/', (req, res, next) => {
     name: req.body.name,
     pictureUrl: req.body.pictureUrl,
     description: req.body.description,
-    _employees: req.body._employees,
     website: req.body.website,
     role: req.body.role,
     sector: req.body.sector
   });
 
+  
   company.save((err) => {
+    console.log("DEBUG error", err)    
     if (err) {
       res.json(err);
       return;
