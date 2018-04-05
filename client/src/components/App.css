@@ -2,16 +2,61 @@
   text-align: center;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 80s linear;
-  height: 80px;
-}
-
 .App-header {
   background-color: #222;
-  height: 180px;
-  padding: 30px;
+  height: 95px;
+  margin-bottom: 60px;
+  padding: 0px;
   color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* background-image: url('/Users/AntoineMarc/Desktop/ironHack/module3/intra-orion/client/public/jeremy-perkins-390608.jpg'); */
+}
+
+.dropdown-menu  {
+  background-color: #222 !important;
+  margin: 0px !important;
+  padding: 0px !important;
+}
+
+.dropdown-menu a {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+/* .dropdown-menu a:nth-child(1) {
+  background-color: #f7dba7 !important;
+}
+
+.dropdown-menu a:nth-child(2) {
+  background-color: #f1ab86 !important;
+}
+
+.dropdown-menu a:nth-child(3) {
+  background-color: #c57b57 !important;
+}
+
+.dropdown-menu a:nth-child(4) {
+  background-color: #1e2d2f !important;
+}
+
+.dropdown-menu a:nth-child(5) {
+  background-color: #041f1e !important;
+}
+
+.dropdown-menu a:nth-child(6) {
+  background-color: pink !important;
+} */
+
+.App-logo {
+  /* animation: App-logo-spin infinite 80s linear; */
+  height: 65px;
+  margin-left: 80px;
 }
 
 .App-header a {
@@ -27,7 +72,7 @@
   font-size: large;
 }
 
-@keyframes App-logo-spin {
+/* @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
-}
+} */

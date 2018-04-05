@@ -22,9 +22,9 @@ class People extends Component {
 
 
   getHexadecimalColor(people) {
-    let colors = ["#222", "#425cbb", "chartreuse"];
+    let colors = ["#f7dba7", "#f1ab86", "#c57b57", "#1e2d2f", "#041f1e"];
 
-    let index = (people.firstname.length + people.lastname.length + people.email.length) % colors.length;
+    let index = (people.firstname + people.lastname + people.email).length % colors.length;
     return colors[index];
   }
 
@@ -56,18 +56,22 @@ class People extends Component {
   render() {                
     return (
       <div className="People">
-        <h2>People</h2>
-        <p>This is a list of all the people linked with Orion</p>
-        <p>Search for people : <input type="text" value={this.state.searchInput} onChange={(e) => {this.handleInputChange("searchInput", e)}} /></p>
+        <div className="People-header">
+            <h2>People</h2>
+            <p>Disciver the Orion community</p>
+            <p className="People-searchbar"><input autoFocus type="text" value={this.state.searchInput} placeholder="Search..." onChange={(e) => {this.handleInputChange("searchInput", e)}} /></p>
+        </div>
 
-        <div className="people-cards">
+        <div className="people-cards container">
           {this.getFilteredPeople().map((c, i) => <div key={i}>  
             <Link to={'/people/'+ c._id}>
-              <div className="card" style={{width: "18rem"}}>
+              <div className="card" style={{width: "10rem"}}>
                 {c.pictureUrl && <img className="card-img-top" src={c.pictureUrl} alt="Card image cap"/>}
                 {!c.pictureUrl && <div className="default-picture" style={{backgroundColor: this.getHexadecimalColor(c)}} >{c.firstname.substr(0, 1).toUpperCase()}{c.lastname.substr(0, 1).toUpperCase()}</div>}
                 <div className="card-body">
-                  <p className="card-text">{c.firstname} {c.lastname}</p>
+                  <p className="card-text">{c.firstname} {c.lastname} <br/>
+                    {c._company.name}
+                  </p>
                 </div>
               </div>
             </Link> 

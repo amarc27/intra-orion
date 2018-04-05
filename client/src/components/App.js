@@ -67,28 +67,34 @@ class App extends Component {
   }
 
 
-
   render() {                
     return (
-      <div className="App">
+    <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <NavLink activeClassName="selected" to="/">Home</NavLink> 
-          <NavLink activeClassName="selected" to="/people">People</NavLink> 
-          <NavLink activeClassName="selected" to="/office-hours">Office Hours</NavLink>
-          <NavLink activeClassName="selected" to="/knowledge">Knowledge</NavLink>
-          <NavLink activeClassName="selected" to="/tools">Tools</NavLink>
-          <NavLink activeClassName="selected" to="/perks">Perks</NavLink>
-          <NavLink activeClassName="selected" to="/candidates">Candidates</NavLink>
-          
-          <NavLink activeClassName="selected" to="/admin">Admin</NavLink>
+          {/* <Link activeClassName="selected" to="/"> */}
+            <div className="App-dropdown dropdown">
+              <img src={logo} className="App-logo dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" alt="logo" />
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <Link class="dropdown-item"  to="/people">People</Link>
+                <Link class="dropdown-item" to="/office-hours">Office Hours</Link>
+                <Link class="dropdown-item" to="/knowledge">Knowledge</Link>
+                <Link class="dropdown-item" to="/tools">Tools</Link>
+                <Link class="dropdown-item" to="/perks">Perks</Link>
+                <Link class="dropdown-item" to="/candidates">Candidates</Link>
+              </div>
+            </div>
+          {/* </Link> */}
+          <div className="nav-links-main">
+            {api.isAdmin() && <NavLink activeClassName="selected" to="/admin">Admin</NavLink>}
 
-          {!api.isLoggedIn() && <Link to="/signup">Signup</Link> }
-          {!api.isLoggedIn() && <Link to="/login">Login</Link> }
-          {api.isLoggedIn() && <Link to="/" onClick={(e) => this.handleLogoutClick(e)}>Logout</Link> }
-          {/* <NavLink activeClassName="selected" to="/signup">Signup</NavLink>
-          <NavLink activeClassName="selected" to="/login">Login</NavLink>
-          <NavLink activeClassName="selected" to="/logout">Logout</NavLink> */}
+            {!api.isLoggedIn() && <NavLink to="/signup">Signup</NavLink> }
+            {!api.isLoggedIn() && <NavLink to="/login">Login</NavLink> }
+            {api.isLoggedIn() && <NavLink to="/" onClick={(e) => this.handleLogoutClick(e)}>Logout</NavLink> }
+          </div>
+          <div className="nav-links-user">
+            {<NavLink activeClassName="selected" to="/agenda">Agenda</NavLink>}
+            <NavLink activeClassName="selected" to="/profile">Profile</NavLink>
+          </div>
         </header>
         <Switch>
           <Route path="/" exact component={Home} />
@@ -131,7 +137,7 @@ class App extends Component {
           
           {/* No route found */}
           <Route render={() => <h2>404</h2>} />
-        </Switch>        
+        </Switch>
       </div>
     );
   }

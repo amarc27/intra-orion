@@ -1,0 +1,28 @@
+.Home-main-links {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  /* flex-wrap: wrap; */
+}
+
+.Home-main-links a {
+  color: #425cbb;
+  padding: 0 20px;
+  font-size: 2em;
+  font-weight: 700;
+}
+
+.Home-li {
+  list-style-type: none;
+  margin-bottom: 20px;
+}
+
+.Home-ul {
+  margin: 40px 0px;
+}
+
+.Home-title {
+  font-size: 3em;
+  font-weight: 900;
+}

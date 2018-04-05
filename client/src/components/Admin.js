@@ -11,9 +11,10 @@ class Admin extends Component {
     super(props)
     this.state = {
       firstname: "",
-      lastname: "chacha",
+      lastname: "",
       email: "",
-      role: "Founder",
+      role: "",
+      _company:"",
 
       companies: [],
       companyName: "",
@@ -38,10 +39,10 @@ class Admin extends Component {
 
 
   handleInputChange(stateFieldName, event) {
-    console.log('input')
     let newState = {}
+    console.log("DEUBUUG dropdowns", this.state._company);
     newState[stateFieldName] = event.target.value
-  
+    
     this.setState(newState)
   }
 
@@ -53,6 +54,7 @@ class Admin extends Component {
       lastname: this.state.lastname,
       email: this.state.email,
       role: this.state.role,
+      _company: this.state._company
     }
     
     api.postSendMail(data)
@@ -62,7 +64,7 @@ class Admin extends Component {
           lastname: "",
           email: "",
           role: "",
-          message: `Your people '${this.state.firstname} ${this.state.lastname} (${this.state.email}, ${this.state.role})' has been invited`
+          message: `Your people '${this.state.firstname} ${this.state.lastname} (${this.state.email}, ${this.state.role}, ${this.state.company})' has been invited`
         })
         setTimeout(() => {
           this.setState({
@@ -130,12 +132,12 @@ class Admin extends Component {
             <option value="Admin">Admin</option>
             <option value="EIR">EIR</option>
             <option value="Staff">Staff</option>
-            <option value="Founder">Founder</option>
+            <option value="Founder" defaultValue>Founder</option>
             <option value="Outer">Outer</option>
           </select>
-          
-          <select name="_company">
-            {this.state.companies.map((c, i) =>  <option value={c._id}>{c.name}</option>)}
+          <br/>
+          <select onChange={(e) => {this.handleInputChange("_company", e)}} value={this.state._company} name="_company">
+            {this.state.companies.map((c, i) =>  <option key={c._id} value={c._id}>{c.name}</option>)}
           </select>
 
           <br/><br/>
@@ -148,8 +150,18 @@ class Admin extends Component {
         companyPictureUrl: <input type="text" value={this.state.companyPictureUrl} onChange={(e) => {this.handleInputChange("companyPictureUrl", e)}} /> <br/>
         companyDescription: <input type="text" value={this.state.companyDescription} onChange={(e) => {this.handleInputChange("companyDescription", e)}} /> <br/>
         companyWebsite: <input type="text" value={this.state.companyWebsite} onChange={(e) => {this.handleInputChange("companyWebsite", e)}} /> <br/>
-        companyRole: <input type="text" value={this.state.companyRole} onChange={(e) => {this.handleInputChange("companyRole", e)}} /> <br/>
-        companySector: <input type="text" value={this.state.companySector} onChange={(e) => {this.handleInputChange("companySector", e)}} /> <br/>
+        companyRole:  <select onChange={(e) => {this.handleInputChange("companyRole", e)}} value={this.state.companyRole} name="role">
+                        <option value="Startup">Startup</option>
+                        <option value="Investor">Investor</option>
+                        <option value="EIR">Entrepreneur in Residence</option>
+                        <option value="Outer">Outer</option>
+                      </select> <br/>
+        companySector: <select onChange={(e) => {this.handleInputChange("companySector", e)}} value={this.state.companySector} name="role">
+                          <option value="BioTech">BioTech</option>
+                          <option value="EdTech">EdTech</option>
+                          <option value="FinTech">FinTech</option>
+                          <option value="SexTech">SexTech</option>
+                        </select> <br/>
         <button onClick={(e) => this.handleCompanyAddClick(e)}>Add company</button>
 
         <div style={{

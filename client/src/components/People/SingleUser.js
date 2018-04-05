@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Route, Switch, NavLink, Link } from 'react-router-dom';
 import api from '../../api';
-// import './SingleUser.css';
+import './SingleUser.css';
 
 
 class SingleUser extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      people: [],
+      people: {},
       message: null,
       f: "",
       l: ""
@@ -51,21 +51,29 @@ class SingleUser extends Component {
   
   render() {                
     return (
-      <div className="SingleUser">
-        <h2>SingleUser</h2>
-        <h3>Main infos</h3><br/>
-        <img className="picture-url picture-url-round" src={this.state.people.pictureUrl} alt=""/>
-        <p> {this.state.people.firstname} {this.state.people.lastname} </p>
-        <p> {this.state.people.email} </p>
-        <p> {this.state.people.mobilePhone} </p>
-        <p> {this.state.people.role} </p>
+      <div className="SingleUser" container>
+        <div className="profile-picture">
+          <img className="picture-url picture-url-round" src={this.state.people.pictureUrl} alt=""/>
+        </div>
 
-        {api.isAdmin() && (
-          <div>
-            <Link to={'/people/' + this.state.people._id + '/edit'}>Edit</Link> <br/>
-            <button type="submit" onClick={(e) => this.handleClick(e)}>Delete</button>
-          </div>
-        )}
+        <div className="profile-content">
+          <h2>{this.state.people.firstname} {this.state.people.lastname}</h2>
+          <p> <a href={"mailto:" + this.state.people.email}>Email me</a></p>
+          <p> Phone : {this.state.people.mobilePhone} </p>
+          <p> SpecialSkill : {this.state.people.specialSkill} </p>
+          <p> Position : {this.state.people.position} </p>
+          <p> Company : {this.state.people._company && this.state.people._company.name} </p>
+
+          {api.isAdmin() && (
+            <div>
+              <Link to={'/people/' + this.state.people._id + '/edit'}>Edit</Link> <br/>
+              <button type="submit" onClick={(e) => this.handleClick(e)}>Delete</button>
+            </div>
+          )}
+        </div>
+
+
+
         <div style={{
           margin: 10,
           backgroundColor: "green",

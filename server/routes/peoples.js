@@ -31,8 +31,9 @@ router.get('/', (req, res, next) => {
   let filter = {}
   if (req.query.role)
     filter.role = req.query.role
-  People.find(filter)
+  People.find(filter).populate("_company")
     .then(peoples => {
+      
       res.json(peoples)
     })
 });
@@ -46,14 +47,12 @@ router.get('/:id', (req, res) => {
     return;
   }
   
-  People.findById(req.params.id, (err, people) => {
-      if (err) {
-        res.json(err);
-        return;
-      }
-
-      res.json(people);
-    });
+  People.findById(req.params.id)
+  .populate("_company")
+  .then(people => {
+    res.json(people);
+  })
+  .catch(err => res.json(err))
 });
 
 
@@ -84,6 +83,7 @@ router.post('/', (req, res, next) => {
     firstname: req.body.firstname,
     lastname: req.body.lastname,
     mobilePhone: req.body.mobilePhone,
+    specialSkill: req.body.specialSkill,
     role: req.body.role,
     pictureUrl: req.body.pictureUrl,
     position: req.body.position,
@@ -128,10 +128,11 @@ router.put('/:id', passport.authenticate("jwt", config.jwtSession), (req, res, n
     firstname: req.body.firstname,
     lastname: req.body.lastname,
     mobilePhone: req.body.mobilePhone,
+    specialSkill: req.body.specialSkill,
     role: req.body.role,
-    pictureUrl: req.body.pictureUrl,
+    // pictureUrl: req.body.pictureUrl,
     position: req.body.position,
-    _company: req.body._company,
+    // _company: req.body._company,
     email: req.body.email
   };
   
@@ -142,7 +143,8 @@ router.put('/:id', passport.authenticate("jwt", config.jwtSession), (req, res, n
     }
 
     res.json({
-      message: 'People updated successfully'
+      message: 'People updated successfully',
+      success: true
     });
   });
 })

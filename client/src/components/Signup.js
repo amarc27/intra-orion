@@ -11,13 +11,9 @@ class Signup extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      firstname: "",
-      lastname: "",
       mobilePhone: "",
-      role: "",
       specialSkill: "",
       position: "",
-      company: "",
       email: "",
       signupSecret: "",
       message: null,
@@ -47,17 +43,12 @@ class Signup extends Component {
       this.setState({message: "The passwords don't match"})
       return;
     }
-    console.log('email', this.state.email)
     let data = {
       email: this.state.email,
       signupSecret: this.state.signupSecret,
-      firstname: this.state.firstname,
-      lastname: this.state.lastname,
       mobilePhone: this.state.mobilePhone,
-      role: this.state.role,
       specialSkill: this.state.specialSkill,
       position: this.state.position,
-      company: this.state.company,
       password: this.state.password,
     }
 
@@ -66,10 +57,7 @@ class Signup extends Component {
     api.postSignup(data)
     .then(result => {
       this.setState({
-        firstname: "",
-        lastname: "",
         mobilePhone: "",
-        role: "",
         pictureUrl: "",
         position: "",
         email: "",
@@ -103,13 +91,8 @@ class Signup extends Component {
       <div className="Signup">
         <h2>Signup</h2>
         <form>
-          signupSecret: {this.state.signupSecret} <br/>
-          email: {this.state.email} <br/>
-          firstname: <input type="text" value={this.state.firstname} onChange={(e) => {this.handleInputChange("firstname", e)}} /> <br/>
-          lastname: <input type="text" value={this.state.lastname} onChange={(e) => {this.handleInputChange("lastname", e)}} /> <br/>
           mobilePhone: <input type="text" value={this.state.mobilePhone} onChange={(e) => {this.handleInputChange("mobilePhone", e)}} /> <br/>
           specialSkill: <input type="text" value={this.state.specialSkill} onChange={(e) => {this.handleInputChange("specialSkill", e)}} /> <br/>
-          company: <input type="text" value={this.state.company} onChange={(e) => {this.handleInputChange("company", e)}} /> <br/>
           position: <input type="text" value={this.state.position} onChange={(e) => {this.handleInputChange("position", e)}} /> <br/>
           password: <input type="password" value={this.state.password} onChange={(e) => {this.handleInputChange("password", e)}} /> <br/>
           Confirm password: <input type="password" value={this.state.password2} onChange={(e) => {this.handleInputChange("password2", e)}} /> <br/>

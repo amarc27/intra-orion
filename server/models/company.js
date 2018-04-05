@@ -7,8 +7,8 @@ const companySchema = new Schema({
   description: {type:String},  
   _employees: [{ type: Schema.Types.ObjectId, ref: 'People' }],
   website: {type:String},
-  role: {type: String, enum: ["Startup", "Investor", "EntInRes", "Outter"]},
-  sector: {type: String, enum: ["BioTech", "Edtech", "FinTech", "SexTech"]},
+  role: {type: String, enum: ["Startup", "Investor", "EIR", "Outter"]},
+  sector: {type: String, enum: ["BioTech", "EdTech", "FinTech", "SexTech"]},
 }, {
   timestamps: { createdAt: "created_at", updatedAt: "updated_at" }
 });

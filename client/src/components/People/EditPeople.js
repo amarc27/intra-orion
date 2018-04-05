@@ -15,7 +15,9 @@ class EditPeople extends Component {
       role: "",
       pictureUrl: "",
       position: "",
+      specialSkill: "",
       email: "",
+      
       message: null
     }
   }
@@ -41,6 +43,7 @@ class EditPeople extends Component {
           pictureUrl: people.pictureUrl,
           position: people.position,
           email: people.email,
+          specialSkill: people.specialSkill
         })
       })
       .catch(err => {
@@ -58,6 +61,7 @@ class EditPeople extends Component {
       pictureUrl: this.state.pictureUrl,
       position: this.state.position,
       email: this.state.email,
+      specialSkill: this.state.specialSkill
     }
 
     let id = this.props.match.params.id;
@@ -72,13 +76,18 @@ class EditPeople extends Component {
           pictureUrl: "",
           position: "",
           email: "",
+          specialSkill: "",
           message: `Your people '${this.state.firstname} ${this.state.lastname}' has been modified`
         })
-        setTimeout(() => {
-          this.setState({
-            message: null
-          })
-        }, 1000)
+        // setTimeout(() => {
+        //   this.setState({
+        //     message: null
+        //   })
+        // }, 1000)
+        if (result.success)
+          this.props.history.push("/people/"+ this.props.match.params.id)
+        else
+          this.setMessage("Edit failed")
       })
       .catch(err => {
       })
@@ -115,7 +124,7 @@ class EditPeople extends Component {
           lastname: <input type="text" value={this.state.lastname} onChange={(e) => {this.handleInputChange("lastname", e)}} /> <br/>
           mobilePhone: <input type="text" value={this.state.mobilePhone} onChange={(e) => {this.handleInputChange("mobilePhone", e)}} /> <br/>
           role: <input type="text" value={this.state.role} onChange={(e) => {this.handleInputChange("role", e)}} /> <br/>
-          pictureUrl: <input type="text" value={this.state.pictureUrl} onChange={(e) => {this.handleInputChange("pictureUrl", e)}} /> <br/>
+          specialSkill: <input type="text" value={this.state.specialSkill} onChange={(e) => {this.handleInputChange("specialSkill", e)}} /> <br/>
           position: <input type="text" value={this.state.position} onChange={(e) => {this.handleInputChange("position", e)}} /> <br/>
           email: <input type="text" value={this.state.email} onChange={(e) => {this.handleInputChange("email", e)}} /> <br/>
           <button onClick={(e) => this.handleClick(e)}>Modify people</button>
