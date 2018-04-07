@@ -58,7 +58,7 @@ class People extends Component {
       <div className="People">
         <div className="People-header">
             <h2>People</h2>
-            <p>Disciver the Orion community</p>
+            <p>Discover the Orion community</p>
             <p className="People-searchbar"><input autoFocus type="text" value={this.state.searchInput} placeholder="Search..." onChange={(e) => {this.handleInputChange("searchInput", e)}} /></p>
         </div>
 

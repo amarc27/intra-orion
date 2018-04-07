@@ -74,17 +74,18 @@ class App extends Component {
           {/* <Link activeClassName="selected" to="/"> */}
             <div className="App-dropdown dropdown">
               <img src={logo} className="App-logo dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" alt="logo" />
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <Link class="dropdown-item"  to="/people">People</Link>
-                <Link class="dropdown-item" to="/office-hours">Office Hours</Link>
-                <Link class="dropdown-item" to="/knowledge">Knowledge</Link>
-                <Link class="dropdown-item" to="/tools">Tools</Link>
-                <Link class="dropdown-item" to="/perks">Perks</Link>
-                <Link class="dropdown-item" to="/candidates">Candidates</Link>
+              <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <Link className="dropdown-item"  to="/people">People</Link>
+                <Link className="dropdown-item" to="/office-hours">Office Hours</Link>
+                <Link className="dropdown-item" to="/knowledge">Knowledge</Link>
+                <Link className="dropdown-item" to="/tools">Tools</Link>
+                <Link className="dropdown-item" to="/perks">Perks</Link>
+                <Link className="dropdown-item" to="/candidates">Candidates</Link>
               </div>
             </div>
           {/* </Link> */}
           <div className="nav-links-main">
+            <NavLink activeClassName="selected" to="/">Home</NavLink>
             {api.isAdmin() && <NavLink activeClassName="selected" to="/admin">Admin</NavLink>}
 
             {!api.isLoggedIn() && <NavLink to="/signup">Signup</NavLink> }

@@ -3,7 +3,11 @@ import axios from 'axios';
 import { Route, Switch, NavLink, Link } from 'react-router-dom';
 import api from '../../api';
 import './SingleUser.css';
+import $ from 'jquery';
+import PopperJS from 'popper.js';
 
+import mailLogo from './../../img/logo-mail.png';
+import phoneLogo from './../../img/logo-phone.png';
 
 class SingleUser extends Component {
   constructor(props) {
@@ -14,6 +18,13 @@ class SingleUser extends Component {
       f: "",
       l: ""
     }
+  }
+
+  getHexadecimalColor(people) {
+    let colors = ["#f7dba7", "#f1ab86", "#c57b57", "#1e2d2f", "#041f1e"];
+
+    let index = (people.firstname + people.lastname + people.email).length % colors.length;
+    return colors[index];
   }
 
 
@@ -39,6 +50,20 @@ class SingleUser extends Component {
 
 
   componentDidMount(props) {
+    // For modals
+    $('#myModal').on('shown.bs.modal', function () {
+      $('#myInput').trigger('focus')
+    })
+
+    // // For tooltips
+    // $(function () {
+    //   $('[data-toggle="tooltip"]').tooltip()
+    // })
+
+    // $(function () {
+    //   $('[data-toggle="popover"]').popover()
+    // })
+
     let id = this.props.match.params.id
     api.getSingleUser(id)
       .then(people => {
@@ -53,26 +78,36 @@ class SingleUser extends Component {
     return (
       <div className="SingleUser" container>
         <div className="profile-picture">
-          <img className="picture-url picture-url-round" src={this.state.people.pictureUrl} alt=""/>
+          {this.state.people.pictureUrl && <img className="picture-url picture-url-round" src={this.state.people.pictureUrl} alt=""/>}
+          {/* {this.state.people.firstname.substr(0, 1).toUpperCase()}{this.state.people.lastname.substr(0, 1).toUpperCase()} */}
+          {!this.state.people.pictureUrl && <div className="default-picture" style={{backgroundColor: this.getHexadecimalColor(this.state.people)}}> {this.state.people.firstname} {this.state.people.lastname} </div>}
+
         </div>
 
         <div className="profile-content">
           <h2>{this.state.people.firstname} {this.state.people.lastname}</h2>
-          <p> <a href={"mailto:" + this.state.people.email}>Email me</a></p>
-          <p> Phone : {this.state.people.mobilePhone} </p>
-          <p> SpecialSkill : {this.state.people.specialSkill} </p>
-          <p> Position : {this.state.people.position} </p>
-          <p> Company : {this.state.people._company && this.state.people._company.name} </p>
+          <div className="contact-logos">
+            <a href={"mailto:" + this.state.people.email}><img src={mailLogo} className="logo-mail" alt="logo-mail" /></a>
+            <img src={phoneLogo} className="logo-phone" alt="logo-phone" />
+          </div>
 
+
+          {/* <p> Phone : {this.state.people.mobilePhone} </p> */}
+          <h5>Who are you ?</h5>
+          <p>I am {this.state.people.position} @{this.state.people._company && this.state.people._company.name}</p>
+          <br/>
+          <h5>Other fellows can ask me anything about:</h5>
+          <p>{this.state.people.specialSkill}</p>
+          {/* <p> Position : {this.state.people.position} </p>
+          <p> Company : {this.state.people._company && this.state.people._company.name} </p> */}
+          <br/>
           {api.isAdmin() && (
             <div>
-              <Link to={'/people/' + this.state.people._id + '/edit'}>Edit</Link> <br/>
-              <button type="submit" onClick={(e) => this.handleClick(e)}>Delete</button>
+              <button className="btn btn-secondary"><Link to={'/people/' + this.state.people._id + '/edit'}>Edit</Link></button> <br/>
+              <button type="submit" className="btn btn-danger" onClick={(e) => this.handleClick(e)}>Delete</button>
             </div>
           )}
         </div>
-
-
 
         <div style={{
           margin: 10,
