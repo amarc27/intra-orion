@@ -22,7 +22,7 @@ class People extends Component {
 
 
   getHexadecimalColor(people) {
-    let colors = ["#f7dba7", "#f1ab86", "#c57b57", "#1e2d2f", "#041f1e"];
+    let colors = ["#021429", "#00C8FF", "#FF0027", "#FFB6C1", "#041f1e"];
 
     let index = (people.firstname + people.lastname + people.email).length % colors.length;
     return colors[index];
@@ -59,7 +59,11 @@ class People extends Component {
         <div className="People-header">
             <h2>People</h2>
             <p>Discover the Orion community</p>
-            <p className="People-searchbar"><input autoFocus type="text" value={this.state.searchInput} placeholder="Search..." onChange={(e) => {this.handleInputChange("searchInput", e)}} /></p>
+            <p className="People-searchbar">
+              <form className="form-inline">
+                <input autoFocus type="search" className="form-control" value={this.state.searchInput} placeholder="Search..." onChange={(e) => {this.handleInputChange("searchInput", e)}} />
+              </form>
+            </p>
         </div>
 
         <div className="people-cards container">

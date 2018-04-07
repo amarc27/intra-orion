@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 // import { Route, Switch, NavLink, Link } from 'react-router-dom';
 import api from '../../api';
-// import './EditPeople.css';
+import './EditPeople.css';
 
 
 class EditPeople extends Component {
@@ -110,16 +110,88 @@ class EditPeople extends Component {
       })
   }
 
+  getHexadecimalColor() {
+    let colors = ["#f7dba7", "#f1ab86", "#c57b57", "#1e2d2f", "#041f1e"];
+
+    let index = (this.state.firstname + this.state.lastname + this.state.email).length % colors.length;
+    return colors[index];
+  }
+
+  getInitials() {    
+    if (this.state.firstname) {
+      let fi = this.state.firstname.charAt(0);
+      let li = this.state.lastname.charAt(0);
+
+      return fi + li
+    }
+    else return "Loading..."
+  }
+
+
   render() {                
     return (
       <div className="EditPeople">
         <h2>Edit people</h2>
-        <p>Edit</p>
-        {!this.state.pictureUrl && <div>Loading...</div>}
-        <img className="picture-url" src={this.state.pictureUrl} alt=""/><br/>
-        <input type="file" name="" id="" onChange={this.handleInputFileChange.bind(this)} /><br/>
-        <hr/>
-        <form>
+        {/* <div class="custom-file">
+          <input type="file" onChange={this.handleInputFileChange.bind(this)} class="custom-file-input" id="customFile"></input>
+          <label class="custom-file-label" for="customFile">Choose file</label>
+        </div> */}
+        {/* <input type="file" name="" id="" onChange={this.handleInputFileChange.bind(this)} /><br/> */}
+
+        <form className="edit-form">
+          <div className="profile-picture">
+            {this.state.pictureUrl && <img className="picture-url" src={this.state.pictureUrl} alt=""/>}<br/>
+            {!this.state.pictureUrl && <div className="default-picture" style={{backgroundColor: this.getHexadecimalColor()}}>{this.getInitials(this.state.people)} </div>}
+          </div>
+          <div class="custom-file">
+            <input type="file" onChange={this.handleInputFileChange.bind(this)} class="custom-file-input" id="customFile"></input>
+            <label className="custom-file-label" for="customFile">Choose file</label>
+          </div>
+          {/* <input type="file" name="" id="" onChange={this.handleInputFileChange.bind(this)} /><br/> */}
+          <hr/>
+
+          <div className="form-group">
+            <label for="email">Email address</label>
+            <input type="email" value={this.state.email} onChange={(e) => {this.handleInputChange("email", e)}} className="form-control" id="email" placeholder="Enter email"></input>
+          </div>
+          <div className="row">
+            <div className="form-group col">
+              <label for="firstname">Firstname</label>            
+              <input type="text" value={this.state.firstname} onChange={(e) => {this.handleInputChange("firstname", e)}} className="form-control" id="firstname" placeholder="Enter firstname"></input>
+            </div>
+            <div className="form-group col">
+              <label for="lastname">Lastname</label>            
+              <input type="text" value={this.state.lastname} onChange={(e) => {this.handleInputChange("lastname", e)}} className="form-control" id="lastname" placeholder="Enter lastname"></input>
+            </div>
+          </div>
+          <div className="form-group">
+            <label for="mobilePhone">Phone number</label>            
+            <input type="tel" value={this.state.mobilePhone} onChange={(e) => {this.handleInputChange("mobilePhone", e)}} className="form-control" id="mobilePhone" placeholder="Enter phone number"></input>
+          </div>
+          <div className="form-group">
+            <label for="role">Role</label>
+            <select className="form-control" id="role" onChange={(e) => {this.handleInputChange("role", e)}} value={this.state.role} name="role">
+              <option value="Admin">Admin</option>
+              <option value="EIR">EIR</option>
+              <option value="Staff">Staff</option>
+              <option value="Founder" defaultValue>Founder</option>
+              <option value="Outer">Outer</option>
+            </select>
+          </div>
+          <div className="form-group">
+            <label for="specialSkill">Main skill</label>            
+            <input type="text" value={this.state.specialSkill} onChange={(e) => {this.handleInputChange("specialSkill", e)}} className="form-control" id="specialSkill" aria-describedby="specialSkillHelp" placeholder="Indicate your main skill, what you are good at"></input>
+            <small id="specialSkillHelp" class="form-text text-muted">Tell us what skill you're good at, so that others can contact you if they need help on it.</small>
+          </div>
+          <div className="form-group">
+            <label for="position">Position</label>            
+            <input type="text" value={this.state.position} onChange={(e) => {this.handleInputChange("position", e)}} className="form-control" id="position" placeholder="Your official position in the company"></input>
+          </div>
+          <button onClick={(e) => this.handleClick(e)} class="btn btn-secondary">Modify this profile</button>
+        </form>
+
+
+        {/* <form>
           firstname: <input type="text" value={this.state.firstname} onChange={(e) => {this.handleInputChange("firstname", e)}} /> <br/>
           lastname: <input type="text" value={this.state.lastname} onChange={(e) => {this.handleInputChange("lastname", e)}} /> <br/>
           mobilePhone: <input type="text" value={this.state.mobilePhone} onChange={(e) => {this.handleInputChange("mobilePhone", e)}} /> <br/>
@@ -128,7 +200,7 @@ class EditPeople extends Component {
           position: <input type="text" value={this.state.position} onChange={(e) => {this.handleInputChange("position", e)}} /> <br/>
           email: <input type="text" value={this.state.email} onChange={(e) => {this.handleInputChange("email", e)}} /> <br/>
           <button onClick={(e) => this.handleClick(e)}>Modify people</button>
-        </form>
+        </form> */}
         <div style={{
           margin: 10,
           backgroundColor: "blue",

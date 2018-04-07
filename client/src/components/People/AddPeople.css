@@ -1,0 +1,37 @@
+.edit-form {
+  width: 400px;
+  display: flex;
+    flex-direction: column;
+  margin: auto;
+}
+
+.form-group {
+  padding-bottom: 5px;
+}
+
+label {
+  display: block;
+  margin-bottom: .5rem;
+  text-align: start;
+  width: 100%;
+}
+
+.AddPeople .default-picture {
+  height: 300px;
+  width: 300px;
+  background-color: gray;
+  color: white;
+  display: flex;
+    justify-content: center;
+    align-items: center;
+  font-size: 150px;
+  border-radius: 2%;
+  margin-right: 20px;
+  margin-bottom: 20px;
+}
+
+.profile-picture {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}

@@ -67,7 +67,17 @@ class App extends Component {
   }
 
 
-  render() {                
+  render() { 
+    if (!api.isLoggedIn()) {
+      return (
+        <div>
+        <Switch>
+          <Route path="/signup" exact component={Signup} />
+          <Route component={Login} />
+        </Switch>
+        </div>
+      )
+    }              
     return (
     <div className="App">
         <header className="App-header">
@@ -92,10 +102,10 @@ class App extends Component {
             {!api.isLoggedIn() && <NavLink to="/login">Login</NavLink> }
             {api.isLoggedIn() && <NavLink to="/" onClick={(e) => this.handleLogoutClick(e)}>Logout</NavLink> }
           </div>
-          <div className="nav-links-user">
+          {/* <div className="nav-links-user">
             {<NavLink activeClassName="selected" to="/agenda">Agenda</NavLink>}
             <NavLink activeClassName="selected" to="/profile">Profile</NavLink>
-          </div>
+          </div> */}
         </header>
         <Switch>
           <Route path="/" exact component={Home} />

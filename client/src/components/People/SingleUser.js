@@ -50,19 +50,6 @@ class SingleUser extends Component {
 
 
   componentDidMount(props) {
-    // For modals
-    $('#myModal').on('shown.bs.modal', function () {
-      $('#myInput').trigger('focus')
-    })
-
-    // // For tooltips
-    // $(function () {
-    //   $('[data-toggle="tooltip"]').tooltip()
-    // })
-
-    // $(function () {
-    //   $('[data-toggle="popover"]').popover()
-    // })
 
     let id = this.props.match.params.id
     api.getSingleUser(id)
@@ -73,25 +60,32 @@ class SingleUser extends Component {
       })
       .catch(err => console.log(err))
   }
+
+  getInitials(people) {    
+    if (this.state.people.firstname) {
+      let fi = people.firstname.charAt(0);
+      let li = people.lastname.charAt(0);
+
+      return fi + li
+    }
+    else return "Loading..."
+  }
   
   render() {                
     return (
       <div className="SingleUser" container>
         <div className="profile-picture">
           {this.state.people.pictureUrl && <img className="picture-url picture-url-round" src={this.state.people.pictureUrl} alt=""/>}
-          {/* {this.state.people.firstname.substr(0, 1).toUpperCase()}{this.state.people.lastname.substr(0, 1).toUpperCase()} */}
-          {!this.state.people.pictureUrl && <div className="default-picture" style={{backgroundColor: this.getHexadecimalColor(this.state.people)}}> {this.state.people.firstname} {this.state.people.lastname} </div>}
+          {!this.state.people.pictureUrl && <div className="default-picture" style={{backgroundColor: this.getHexadecimalColor(this.state.people)}}>{this.getInitials(this.state.people)} </div>}
 
         </div>
 
         <div className="profile-content">
-          <h2>{this.state.people.firstname} {this.state.people.lastname}</h2>
+        <h2>{this.state.people.firstname} {this.state.people.lastname}</h2>
           <div className="contact-logos">
             <a href={"mailto:" + this.state.people.email}><img src={mailLogo} className="logo-mail" alt="logo-mail" /></a>
-            <img src={phoneLogo} className="logo-phone" alt="logo-phone" />
+            <img src={phoneLogo} className="logo-phone" alt="logo-phone" title={this.state.people.mobilePhone} />
           </div>
-
-
           {/* <p> Phone : {this.state.people.mobilePhone} </p> */}
           <h5>Who are you ?</h5>
           <p>I am {this.state.people.position} @{this.state.people._company && this.state.people._company.name}</p>
@@ -102,8 +96,8 @@ class SingleUser extends Component {
           <p> Company : {this.state.people._company && this.state.people._company.name} </p> */}
           <br/>
           {api.isAdmin() && (
-            <div>
-              <button className="btn btn-secondary"><Link to={'/people/' + this.state.people._id + '/edit'}>Edit</Link></button> <br/>
+            <div className="edit-delete-buttons">
+              <button className="btn btn-secondary edit-button"><Link to={'/people/' + this.state.people._id + '/edit'}>Edit</Link></button> <br/>
               <button type="submit" className="btn btn-danger" onClick={(e) => this.handleClick(e)}>Delete</button>
             </div>
           )}

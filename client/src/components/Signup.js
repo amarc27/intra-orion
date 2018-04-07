@@ -4,7 +4,7 @@ import queryString from 'query-string';
 
 // import { Route, Switch, NavLink, Link } from 'react-router-dom';
 import api from './../api';
-// import './Signup.css';
+import './Signup.css';
 
 
 class Signup extends Component {
@@ -88,14 +88,14 @@ class Signup extends Component {
   
   render() {                
     return (
-      <div className="Signup">
+      <div className="Signup mt-5 mx-auto container">
         <h2>Signup</h2>
         <form>
-          mobilePhone: <input type="text" value={this.state.mobilePhone} onChange={(e) => {this.handleInputChange("mobilePhone", e)}} /> <br/>
-          specialSkill: <input type="text" value={this.state.specialSkill} onChange={(e) => {this.handleInputChange("specialSkill", e)}} /> <br/>
-          position: <input type="text" value={this.state.position} onChange={(e) => {this.handleInputChange("position", e)}} /> <br/>
-          password: <input type="password" value={this.state.password} onChange={(e) => {this.handleInputChange("password", e)}} /> <br/>
-          Confirm password: <input type="password" value={this.state.password2} onChange={(e) => {this.handleInputChange("password2", e)}} /> <br/>
+          mobilePhone: <input className="form-control" type="text" value={this.state.mobilePhone} onChange={(e) => {this.handleInputChange("mobilePhone", e)}} /> <br/>
+          specialSkill: <input className="form-control" type="text" value={this.state.specialSkill} onChange={(e) => {this.handleInputChange("specialSkill", e)}} /> <br/>
+          position: <input className="form-control" type="text" value={this.state.position} onChange={(e) => {this.handleInputChange("position", e)}} /> <br/>
+          password: <input className="form-control" type="password" value={this.state.password} onChange={(e) => {this.handleInputChange("password", e)}} /> <br/>
+          Confirm password: <input className="form-control" type="password" value={this.state.password2} onChange={(e) => {this.handleInputChange("password2", e)}} /> <br/>
           <button className="btn btn-primary" onClick={(e) => this.handleClick(e)}>Enter Orion</button>
         </form>
         <div style={{

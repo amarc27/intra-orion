@@ -1,9 +1,14 @@
+* {
+  color: #021429;
+}
+
 .App {
   text-align: center;
+  margin-bottom: 20px;
 }
 
 .App-header {
-  background-color: #222;
+  background-color: #021429;
   height: 95px;
   margin-bottom: 60px;
   padding: 0px;
@@ -76,3 +81,8 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 } */
+
+
+.nav-links-main a:hover {
+  color: pink;
+}

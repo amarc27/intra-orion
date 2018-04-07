@@ -71,7 +71,7 @@ router.post('/', (req, res, next) => {
       <html> 
         <h2>Welcome to Orion family 🔥 </h2> 
         <p>To register yourself, you need to sign up on 
-          <a href='http://localhost:3000/signup?email=${req.body.email}&signupSecret=${signupSecret}'>this page</a>, 
+          <a href='https://intra-orion.herokuapp.com/signup?email=${req.body.email}&signupSecret=${signupSecret}'>this page</a>, 
           using this log :
         </p>
         <p><strong>Login</strong> : ${req.body.email} </p>

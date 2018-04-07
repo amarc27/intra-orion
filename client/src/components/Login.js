@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 // import { Route, Switch, NavLink, Link } from 'react-router-dom';
 import api from './../api';
-// import './Login.css';
+import './Login.css';
 
 
 class Login extends Component {
@@ -56,11 +56,11 @@ class Login extends Component {
   
   render() {
     return (
-      <div className="Login">
+      <div className="Login mt-5 mx-auto container">
         <h2>Login</h2>
         <form>
-          email: <input type="text" value={this.state.email} onChange={(e) => {this.handleInputChange("email", e)}} /> <br/>
-          password: <input type="password" value={this.state.password} onChange={(e) => {this.handleInputChange("password", e)}} /> <br/>
+          email: <input className="form-control" type="text" value={this.state.email} onChange={(e) => {this.handleInputChange("email", e)}} /> <br/>
+          password: <input className="form-control" type="password" value={this.state.password} onChange={(e) => {this.handleInputChange("password", e)}} /> <br/>
           <button className="btn btn-primary" onClick={(e) => this.handleClick(e)}>Enter Orion</button>
         </form>
         <div style={{
