@@ -53,7 +53,7 @@ const myCompanies = [
     sector: "Social"
   },
   {
-    name: "Ironhack",
+    name: "Google",
     pictureUrl: "",
     description: "Learn",
     // _employees: [{firstname: "Maxence"}, {firstname: "John"}],

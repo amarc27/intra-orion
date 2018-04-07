@@ -1,0 +1,35 @@
+.card {
+  margin: 10px 10px;
+}
+
+
+.people-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  /* margin: 10px 180px; */
+}
+
+.card-img-top {
+  background-size: cover;
+  background-position: center;
+  object-fit: cover;
+  height: 100px;
+  /* border-radius: 100%;   */
+}
+
+.default-picture {
+  height: 100px;
+  background-color: brown;
+  color: white;
+  font-size: 50px;
+  line-height: 100px;
+}
+
+.card-body {
+  padding: 10px !important;
+}
+
+.card-text {
+  font-size: 0.9em;
+}

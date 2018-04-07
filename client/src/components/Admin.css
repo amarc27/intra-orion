@@ -1,0 +1,32 @@
+.edit-form {
+  width: 400px;
+  display: flex;
+    flex-direction: column;
+  margin: auto;
+}
+
+
+.admin-content {
+  margin-top: 60px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.add-people {
+  margin-right: 280px;
+}
+
+.add-people p {
+  display: block;
+  margin-bottom: .5rem;
+  text-align: start;
+  width: 100%;
+}
+
+.add-company p { 
+  display: block;
+  margin-bottom: .5rem;
+  text-align: start;
+  width: 100%;
+}

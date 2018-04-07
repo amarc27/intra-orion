@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 // import { Route, Switch, NavLink, Link } from 'react-router-dom';
 import api from './../api';
-// import './Admin.css';
+import './Admin.css';
 // import { Container, DropdownToggle, DropdownMenu, DropdownItem, Dropdown } from 'reactstrap';
 
 
@@ -120,49 +120,58 @@ class Admin extends Component {
   render() {                
     return (
       <div className="Admin">
-        <h2>Admin</h2>
+        <h2 className="title">Admin</h2>
 
-        <h2>Add people</h2>
-        <form>
-          Firstname: <input type="text" value={this.state.firstname} onChange={(e) => {this.handleInputChange("firstname", e)}} /> <br/>
-          Lastname: <input type="text" value={this.state.lastname} onChange={(e) => {this.handleInputChange("lastname", e)}} /> <br/>
-          Email: <input type="text" value={this.state.email} onChange={(e) => {this.handleInputChange("email", e)}} /> <br/>
+        <div className="admin-content">
+          <div className="add-people">
+            <h5>Add people</h5>
+            <form className="edit-form">
+              <p>Firstname:</p> <input className="form-control" type="text" value={this.state.firstname} onChange={(e) => {this.handleInputChange("firstname", e)}} /> <br/>
+              <p>Lastname:</p> <input className="form-control" type="text" value={this.state.lastname} onChange={(e) => {this.handleInputChange("lastname", e)}} /> <br/>
+              <p>Email:</p> <input className="form-control" type="text" value={this.state.email} onChange={(e) => {this.handleInputChange("email", e)}} /> <br/>
+              <p>Role:</p>
+              <select onChange={(e) => {this.handleInputChange("role", e)}} value={this.state.role} name="role">
+                <option value="Admin">Admin</option>
+                <option value="EIR">EIR</option>
+                <option value="Staff">Staff</option>
+                <option value="Founder" defaultValue>Founder</option>
+                <option value="Outer">Outer</option>
+              </select>
+              <br/>
+              <p>Company:</p>
+              <select onChange={(e) => {this.handleInputChange("_company", e)}} value={this.state._company} name="_company">
+                {this.state.companies.map((c, i) =>  <option key={c._id} value={c._id}>{c.name}</option>)}
+              </select>
 
-          <select onChange={(e) => {this.handleInputChange("role", e)}} value={this.state.role} name="role">
-            <option value="Admin">Admin</option>
-            <option value="EIR">EIR</option>
-            <option value="Staff">Staff</option>
-            <option value="Founder" defaultValue>Founder</option>
-            <option value="Outer">Outer</option>
-          </select>
-          <br/>
-          <select onChange={(e) => {this.handleInputChange("_company", e)}} value={this.state._company} name="_company">
-            {this.state.companies.map((c, i) =>  <option key={c._id} value={c._id}>{c.name}</option>)}
-          </select>
-
-          <br/><br/>
-          <button onClick={(e) => this.handlePeopleAddClick(e)}>Send request</button>
-        </form>
+              <br/><br/>
+              <button className="btn btn-secondary" onClick={(e) => this.handlePeopleAddClick(e)}>Send request</button>
+            </form>
+        </div>
         <br/><br/>
 
-        <h2>Add company</h2>
-        companyName: <input type="text" value={this.state.companyName} onChange={(e) => {this.handleInputChange("companyName", e)}} /> <br/>
-        companyPictureUrl: <input type="text" value={this.state.companyPictureUrl} onChange={(e) => {this.handleInputChange("companyPictureUrl", e)}} /> <br/>
-        companyDescription: <input type="text" value={this.state.companyDescription} onChange={(e) => {this.handleInputChange("companyDescription", e)}} /> <br/>
-        companyWebsite: <input type="text" value={this.state.companyWebsite} onChange={(e) => {this.handleInputChange("companyWebsite", e)}} /> <br/>
-        companyRole:  <select onChange={(e) => {this.handleInputChange("companyRole", e)}} value={this.state.companyRole} name="role">
-                        <option value="Startup">Startup</option>
-                        <option value="Investor">Investor</option>
-                        <option value="EIR">Entrepreneur in Residence</option>
-                        <option value="Outer">Outer</option>
-                      </select> <br/>
-        companySector: <select onChange={(e) => {this.handleInputChange("companySector", e)}} value={this.state.companySector} name="role">
-                          <option value="BioTech">BioTech</option>
-                          <option value="EdTech">EdTech</option>
-                          <option value="FinTech">FinTech</option>
-                          <option value="SexTech">SexTech</option>
-                        </select> <br/>
-        <button onClick={(e) => this.handleCompanyAddClick(e)}>Add company</button>
+        <div className="add-company">
+          <h5>Add company</h5>
+          <form className="edit-form">
+            <p>Name:</p> <input className="form-control" type="text" value={this.state.companyName} onChange={(e) => {this.handleInputChange("companyName", e)}} /> <br/>
+            <p>Picture:</p> <input className="form-control" type="text" value={this.state.companyPictureUrl} onChange={(e) => {this.handleInputChange("companyPictureUrl", e)}} /> <br/>
+            <p>Description:</p> <input className="form-control" type="text" value={this.state.companyDescription} onChange={(e) => {this.handleInputChange("companyDescription", e)}} /> <br/>
+            <p>Website:</p> <input className="form-control" type="text" value={this.state.companyWebsite} onChange={(e) => {this.handleInputChange("companyWebsite", e)}} /> <br/>
+            <p>Role:</p>  <select onChange={(e) => {this.handleInputChange("companyRole", e)}} value={this.state.companyRole} name="role">
+                            <option value="Startup">Startup</option>
+                            <option value="Investor">Investor</option>
+                            <option value="EIR">Entrepreneur in Residence</option>
+                            <option value="Outer">Outer</option>
+                          </select> <br/>
+            <p>Sector:</p> <select onChange={(e) => {this.handleInputChange("companySector", e)}} value={this.state.companySector} name="role">
+                              <option value="BioTech">BioTech</option>
+                              <option value="EdTech">EdTech</option>
+                              <option value="FinTech">FinTech</option>
+                              <option value="SexTech">SexTech</option>
+                            </select> <br/>
+            <button className="btn btn-secondary" onClick={(e) => this.handleCompanyAddClick(e)}>Add company</button>
+          </form>
+        </div>
+        </div>
 
         <div style={{
           margin: 10,
