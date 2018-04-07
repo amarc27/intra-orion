@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import queryString from 'query-string';
+import querystring from 'querystring';
 
 // import { Route, Switch, NavLink, Link } from 'react-router-dom';
 import api from './../api';
@@ -32,8 +32,8 @@ class Signup extends Component {
 
   componentDidMount(props) {
     this.setState({
-      email: queryString.parse(this.props.location.search).email,
-      signupSecret: queryString.parse(this.props.location.search).signupSecret
+      email: querystring.parse(this.props.location.search).email,
+      signupSecret: querystring.parse(this.props.location.search).signupSecret
     })
   }
 
