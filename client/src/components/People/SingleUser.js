@@ -21,7 +21,7 @@ class SingleUser extends Component {
   }
 
   getHexadecimalColor(people) {
-    let colors = ["#f7dba7", "#f1ab86", "#c57b57", "#1e2d2f", "#041f1e"];
+    let colors = ["#021429", "#00C8FF", "#FF0027", "#FFB6C1", "#041f1e"];
 
     let index = (people.firstname + people.lastname + people.email).length % colors.length;
     return colors[index];
