@@ -73,8 +73,8 @@ class People extends Component {
                 {c.pictureUrl && <img className="card-img-top" src={c.pictureUrl} alt="Card image cap"/>}
                 {!c.pictureUrl && <div className="default-picture" style={{backgroundColor: this.getHexadecimalColor(c)}} >{c.firstname.substr(0, 1).toUpperCase()}{c.lastname.substr(0, 1).toUpperCase()}</div>}
                 <div className="card-body">
-                  <p className="card-text">{c.firstname} {c.lastname} <br/>
-                    {c._company.name}
+                  <p className="card-text"> <span className="people-name">{c.firstname} {c.lastname}</span> <br/>
+                    {c.position && c.position + " -"} {c._company.name}
                   </p>
                 </div>
               </div>
