@@ -7,12 +7,16 @@
     "prestart": "echo --- prestart --- && cd client && npm run build && cd ..",
     "start": "echo --- start --- && cd server && npm start",
     "dev:server": "cd server && npm run dev",
-    "dev:client": "cd client && npm run start"
+    "dev:client": "cd client && npm run start",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "dependencies": {
     "express-validator": "^5.3.1",
     "node-sass": "^4.12.0",
     "nodemailer": "^6.1.1",
-    "randomstring": "^1.1.5"
-  }
+    "randomstring": "^1.1.5",
+    "snyk": "^1.192.3"
+  },
+  "snyk": true
 }
