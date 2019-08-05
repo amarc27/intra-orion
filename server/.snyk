@@ -12,3 +12,13 @@ patch:
   SNYK-JS-LODASH-450202:
     - mailgun-js > async > lodash:
         patched: '2019-07-06T07:26:52.498Z'
+    - snyk > lodash:
+        patched: '2019-08-05T11:34:47.824Z'
+    - snyk > inquirer > lodash:
+        patched: '2019-08-05T11:34:47.824Z'
+    - snyk > snyk-config > lodash:
+        patched: '2019-08-05T11:34:47.824Z'
+    - snyk > snyk-nodejs-lockfile-parser > lodash:
+        patched: '2019-08-05T11:34:47.824Z'
+    - snyk > snyk-nuget-plugin > lodash:
+        patched: '2019-08-05T11:34:47.824Z'
