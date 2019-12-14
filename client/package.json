@@ -15,7 +15,7 @@
     "react-router-dom": "^4.2.2",
     "react-scripts": "3.0.0",
     "reactstrap": "^5.0.0-beta.3",
-    "snyk": "^1.236.0"
+    "snyk": "^1.260.0"
   },
   "scripts": {
     "build-css": "node-sass-chokidar --include-path ./src/styles --include-path ./node_modules src/styles/ -o src/styles/",
