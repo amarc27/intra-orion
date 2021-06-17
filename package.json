@@ -16,7 +16,7 @@
     "node-sass": "^4.12.0",
     "nodemailer": "^6.4.6",
     "randomstring": "^1.1.5",
-    "snyk": "^1.305.0"
+    "snyk": "^1.634.0"
   },
   "snyk": true
 }
